@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Bundles feature.
+ */
+
+include_once 'hr_bundles.features.inc';
