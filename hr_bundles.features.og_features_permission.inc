@@ -1,0 +1,74 @@
+<?php
+/**
+ * @file
+ * hr_bundles.features.og_features_permission.inc
+ */
+
+/**
+ * Implements hook_og_features_default_permissions().
+ */
+function hr_bundles_og_features_default_permissions() {
+  $permissions = array();
+
+  // Exported og permission: 'node:hr_bundle:add user'
+  $permissions['node:hr_bundle:add user'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:administer og menu'
+  $permissions['node:hr_bundle:administer og menu'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:administer panelizer og_group content'
+  $permissions['node:hr_bundle:administer panelizer og_group content'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:approve and deny subscription'
+  $permissions['node:hr_bundle:approve and deny subscription'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:assign editor role'
+  $permissions['node:hr_bundle:assign editor role'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:assign manager role'
+  $permissions['node:hr_bundle:assign manager role'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:manage members'
+  $permissions['node:hr_bundle:manage members'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:update group'
+  $permissions['node:hr_bundle:update group'] = array(
+    'roles' => array(
+      'administrator member' => 'administrator member',
+      'manager' => 'manager',
+    ),
+  );
+
+  return $permissions;
+}
