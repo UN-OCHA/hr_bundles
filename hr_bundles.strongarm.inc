@@ -92,6 +92,32 @@ function hr_bundles_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_context_negotiation_group_context';
+  $strongarm->value = array(
+    'url' => array(),
+    'hr_bundles' => array(),
+    'node' => array(),
+  );
+  $export['og_context_negotiation_group_context'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_context_providers_weight_group_context';
+  $strongarm->value = array(
+    'url' => '-10',
+    'node' => '-6',
+    'comment' => '-4',
+    'og_extras' => '-2',
+    'user-view' => '0',
+    'hr_bundles' => '-8',
+    'user-edit' => '2',
+  );
+  $export['og_context_providers_weight_group_context'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_defaults_node_hr_bundle';
   $strongarm->value = array(
     'status' => 1,

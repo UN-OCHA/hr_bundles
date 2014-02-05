@@ -56,9 +56,9 @@ function _hr_bundles_og_role_load_by_name($bundle, $name) {
 function hr_bundles_og_context_negotiation_info() {
   $providers = array();
 
-  $providers['hr_bundle'] = array(
-    'name' => t('Bundle'),
-    'description' => t('Select groups if they were passed in the node create URL (e.g. node/add/post?og_group_ref=4,5,6). <em>Note: Depends on <a href="@url">Entity reference prepopulate</a> module, and enabling "Prepopulate" in the field settings.</em>', array('@url' => 'http://drupal.org/project/entityreference_prepopulate')),
+  $providers['hr_bundles'] = array(
+    'name' => t('HR Bundle'),
+    'description' => t('Sets operation context within bundle'),
     'callback' => 'hr_bundles_og_context_handler',
     'menu path' => array('node/%', 'group/%/%/admin'),
   );
