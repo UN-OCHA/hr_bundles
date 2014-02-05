@@ -27,6 +27,30 @@ function _hr_bundles_get_operation($gid) {
 }
 
 /**
+ * Get bundles from operation GID
+ */
+function _hr_bundles_get_bundles($gid) {
+  $query = new EntityFieldQuery();
+  $entities = $query->entityCondition('entity_type', 'node')
+    ->entityCondition('bundle', 'hr_bundle')
+    ->propertyCondition('status', 1)
+    ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $gid, '=')
+    ->fieldCondition(OG_GROUP_FIELD, 'value', 1, '=')
+    ->execute();
+  return entity_load('node', array_keys($entities['node']));
+}
+
+/**
+ * Load role by name
+ */
+function _hr_bundles_og_role_load_by_name($bundle, $name) {
+  $roles = og_roles('node', $bundle);
+  $rid = array_search($name, $roles);
+  return $rid;
+}
+    
+
+/**
  * Implements hook_og_context_negotiation_info().
  */
 function hr_bundles_og_context_negotiation_info() {
@@ -35,13 +59,13 @@ function hr_bundles_og_context_negotiation_info() {
   $providers['hr_bundle'] = array(
     'name' => t('Bundle'),
     'description' => t('Select groups if they were passed in the node create URL (e.g. node/add/post?og_group_ref=4,5,6). <em>Note: Depends on <a href="@url">Entity reference prepopulate</a> module, and enabling "Prepopulate" in the field settings.</em>', array('@url' => 'http://drupal.org/project/entityreference_prepopulate')),
-    'callback' => 'hr_bundle_og_context_handler',
+    'callback' => 'hr_bundles_og_context_handler',
     'menu path' => array('node/%', 'group/%/%/admin'),
   );
   return $providers;
 }
 
-function hr_bundle_og_context_handler($node = NULL) {
+function hr_bundles_og_context_handler($node = NULL) {
   $context = og_context_handler_node($node);
   if (!empty($context) && isset($context['node'][0])) {
     $gid = $context['node'][0];
@@ -52,3 +76,105 @@ function hr_bundle_og_context_handler($node = NULL) {
   }
   return $context;
 }
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter()
+ */
+function hr_bundles_form_node_form_alter(&$form, &$form_state) {
+  if (isset($form['field_bundles'])) {
+    // Get operation gid
+    $type = $form_state['node']->type;
+    $op_gid = $form_state['entityreference_prepopulate']['node'][$type][OG_AUDIENCE_FIELD][0];
+    // Make sure it is an operation
+    $op = entity_load('node', array($op_gid));
+    $op = $op[$op_gid];
+    if ($op->type == 'hr_operation') {
+      $roles = og_get_user_roles('node', $op_gid);
+      if (!in_array('manager', $roles) && !in_array('editor', $roles)) {
+        // If user is not a manager or editor of operation, make bundles field required
+        $form['field_bundles'][LANGUAGE_NONE][0]['#required'] = TRUE;
+        $form['field_bundles'][LANGUAGE_NONE][0]['default']['#required'] = TRUE;
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_og_role_grant($entity_type, $gid, $uid, $rid)
+ */
+function hr_bundles_og_role_grant($entity_type, $gid, $uid, $rid) {
+  $group = entity_load('node', array($gid));
+  $group = $group[$gid];
+  $role = og_role_load($rid);
+  // WHEN granting manager or editor role to bundle
+  if ($group->type == 'hr_bundle' && $role->name == 'manager' || $role->name == 'editor') {
+    // Get operation
+    $op_gid = _hr_bundles_get_operation($gid);
+    if (!empty($op_gid)) {
+      if (!og_is_member('node', $op_gid, 'user', user_load($uid))) {
+        // Make user a member of operation
+        $og_membership = og_membership_create('node', $op_gid, 'user', $uid, 'og_user_node');
+        og_membership_save($og_membership);
+      }
+      $rid = _hr_bundles_og_role_load_by_name('hr_operation', 'bundle member');
+      if ($rid) {
+        og_role_grant('node', $op_gid, $uid, $rid);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_og_role_revoke($entity_type, $gid, $uid, $rid)
+ */
+function hr_bundles_og_role_revoke($entity_type, $gid, $uid, $rid) {
+  $group = entity_load('node', array($gid));
+  $group = $group[$gid];
+  $role = og_role_load($rid);
+  // WHEN revoking manager or editor role of a bundle
+  if ($group->type == 'hr_bundle' && $role->name == 'manager' || $role->name == 'editor') {
+    $revoke = TRUE;
+    // Get all bundles from operation
+    $op_gid = _hr_bundles_get_operation($gid);
+    $bundles = _hr_bundles_get_bundles($op_gid);
+    foreach ($bundles as $bundle) {
+      drupal_static_reset('og_get_user_roles');
+      $roles = og_get_user_roles('node', $bundle->nid, $uid);
+      if ($bundle->nid != $gid) {
+        // If manager or editor of another bundle, don't revoke
+        if (in_array('manager', $roles) || in_array('editor', $roles)) {
+          $revoke = FALSE;
+        }
+      }
+      else {
+        // If user still had both roles
+        if (in_array('manager', $roles) && in_array('editor', $roles) && !in_array(OG_ANONYMOUS_ROLE, $roles)) {
+          $revoke = FALSE;
+        }
+      }
+    }
+    if ($revoke == TRUE) {
+      $roles = og_roles('node', 'hr_operation');
+      $rid = array_search('bundle member', $roles);
+      // Revoke bundle member from operation
+      og_role_revoke('node', $op_gid, $uid, $rid);
+    }
+  }
+}
+
+/**
+ * Implements hook_og_membership_delete(OgMembership $og_membership)
+ */
+function hr_bundles_og_membership_delete(OgMembership $og_membership) {
+  if ($og_membership->group_type == 'node' && $og_membership->entity_type == 'user') {
+    // Get group
+    $group = entity_load('node', array($og_membership->gid));
+    $group = $group[$og_membership->gid];
+    if ($group->type == 'hr_bundle') {
+      $rid = _hr_bundles_og_role_load_by_name('hr_bundle', 'manager');
+      hr_bundles_og_role_revoke('node', $og_membership->gid, $og_membership->etid, $rid);
+    }
+  }
+}
+  
+
