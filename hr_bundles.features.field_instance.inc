@@ -244,7 +244,7 @@ function hr_bundles_field_default_field_instances() {
     'bundle' => 'hr_bundle',
     'default_value' => array(
       0 => array(
-        'value' => 0,
+        'value' => 1,
       ),
     ),
     'deleted' => 0,
@@ -303,6 +303,7 @@ function hr_bundles_field_default_field_instances() {
   $field_instances['node-hr_bundle-og_group_ref'] = array(
     'bundle' => 'hr_bundle',
     'default_value' => NULL,
+    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -334,6 +335,9 @@ function hr_bundles_field_default_field_instances() {
             'widget_type' => 'options_select',
           ),
           'status' => TRUE,
+        ),
+        'prepopulate' => array(
+          'status' => 0,
         ),
       ),
       'entity_translation_sync' => FALSE,
