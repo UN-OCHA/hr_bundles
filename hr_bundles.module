@@ -209,5 +209,50 @@ function hr_bundles_og_membership_delete(OgMembership $og_membership) {
     }
   }
 }
-  
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function hr_bundles_form_og_ui_edit_membership_alter(&$form, &$form_state) {
+  if (isset($form_state['build_info']['args'][1]) && isset($form_state['build_info']['args'][2])) {
+    $op_gid = _hr_bundles_get_operation($form_state['build_info']['args'][1]);
+    $roles = og_get_user_roles('node', $op_gid);
+    if (!in_array('manager', $roles)) {
+      $og_membership = $form_state['build_info']['args'][2];
+      $uid = $og_membership->etid;
+      $roles = og_get_user_roles('node', $op_gid, $uid);
+      if (in_array('manager', $roles) || in_array('editor', $roles)) {
+        drupal_set_message(t('This person is a manager or editor of the operation. You can not downgrade his/her membership.'), 'warning');
+        $form['og_user']['state']['#disabled'] = TRUE;
+        if (in_array('manager', $roles)) {
+          // Disable everything
+          $form['og_user']['roles']['#disabled'] = TRUE;
+        }
+        else {
+          $rid = _hr_bundles_og_role_load_by_name('hr_bundle', 'editor');
+          $form['og_user']['roles'][$rid]['#disabled'] = TRUE;
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter()
+ */
+function hr_bundles_form_og_ui_delete_membership_alter(&$form, &$form_state) {
+  if (isset($form_state['build_info']['args'][1]) && isset($form_state['build_info']['args'][2])) {
+    $op_gid = _hr_bundles_get_operation($form_state['build_info']['args'][1]);
+    $roles = og_get_user_roles('node', $op_gid);
+    if (!in_array('manager', $roles)) {
+      $og_membership = $form_state['build_info']['args'][2];
+      $uid = $og_membership->etid;
+      $roles = og_get_user_roles('node', $op_gid, $uid);
+      if (in_array('manager', $roles) || in_array('editor', $roles)) {
+        drupal_set_message(t('This person is a manager or editor of the operation. You can not remove him/her from this group.'), 'error');
+        $form['actions']['submit']['#disabled'] = TRUE;
+      }
+    }
+  }
+}
 
