@@ -107,7 +107,7 @@ function hr_bundles_og_role_grant($entity_type, $gid, $uid, $rid) {
   $group = $group[$gid];
   $role = og_role_load($rid);
   // WHEN granting manager or editor role to bundle
-  if ($group->type == 'hr_bundle' && $role->name == 'manager' || $role->name == 'editor') {
+  if ($group->type == 'hr_bundle' && ($role->name == 'manager' || $role->name == 'editor')) {
     // Get operation
     $op_gid = _hr_bundles_get_operation($gid);
     if (!empty($op_gid)) {
@@ -117,9 +117,24 @@ function hr_bundles_og_role_grant($entity_type, $gid, $uid, $rid) {
         og_membership_save($og_membership);
       }
       $rid = _hr_bundles_og_role_load_by_name('hr_operation', 'bundle member');
-      if ($rid) {
+      drupal_static_reset('og_get_user_roles');
+      $roles = og_get_user_roles('node', $op_gid, $uid);
+      if (!in_array('manager', $roles) && !in_array('editor', $roles)) {
         og_role_grant('node', $op_gid, $uid, $rid);
       }
+    }
+  }
+  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor')) {
+    // Grant role on all bundles
+    $bundles = _hr_bundles_get_bundles($gid);
+    $rid = _hr_bundles_og_role_load_by_name('hr_bundle', $role->name);
+    foreach ($bundles as $bundle) {
+      if (!og_is_member('node', $bundle->nid, 'user', user_load($uid))) {
+        // Make user a member of bundle
+        $og_membership = og_membership_create('node', $bundle->nid, 'user', $uid, 'og_user_node');
+        og_membership_save($og_membership);
+      }
+      og_role_grant('node', $bundle->nid, $uid, $rid);
     }
   }
 }
@@ -132,32 +147,42 @@ function hr_bundles_og_role_revoke($entity_type, $gid, $uid, $rid) {
   $group = $group[$gid];
   $role = og_role_load($rid);
   // WHEN revoking manager or editor role of a bundle
-  if ($group->type == 'hr_bundle' && $role->name == 'manager' || $role->name == 'editor') {
+  if ($group->type == 'hr_bundle' && ($role->name == 'manager' || $role->name == 'editor')) {
     $revoke = TRUE;
     // Get all bundles from operation
     $op_gid = _hr_bundles_get_operation($gid);
-    $bundles = _hr_bundles_get_bundles($op_gid);
-    foreach ($bundles as $bundle) {
-      drupal_static_reset('og_get_user_roles');
-      $roles = og_get_user_roles('node', $bundle->nid, $uid);
-      if ($bundle->nid != $gid) {
-        // If manager or editor of another bundle, don't revoke
-        if (in_array('manager', $roles) || in_array('editor', $roles)) {
-          $revoke = FALSE;
+    $roles = og_get_user_roles('node', $op_gid, $uid);
+    if (in_array('bundle member', $roles)) {
+      $bundles = _hr_bundles_get_bundles($op_gid);
+      foreach ($bundles as $bundle) {
+        drupal_static_reset('og_get_user_roles');
+        $roles = og_get_user_roles('node', $bundle->nid, $uid);
+        if ($bundle->nid != $gid) {
+          // If manager or editor of another bundle, don't revoke
+          if (in_array('manager', $roles) || in_array('editor', $roles)) {
+            $revoke = FALSE;
+          }
+        }
+        else {
+          // If user still had both roles
+          if (in_array('manager', $roles) && in_array('editor', $roles) && !in_array(OG_ANONYMOUS_ROLE, $roles)) {
+            $revoke = FALSE;
+          }
         }
       }
-      else {
-        // If user still had both roles
-        if (in_array('manager', $roles) && in_array('editor', $roles) && !in_array(OG_ANONYMOUS_ROLE, $roles)) {
-          $revoke = FALSE;
-        }
+      if ($revoke == TRUE) {
+        $rid = _hr_bundles_og_role_load_by_name('hr_operation', 'bundle member');
+        // Revoke bundle member from operation
+        og_role_revoke('node', $op_gid, $uid, $rid);
       }
     }
-    if ($revoke == TRUE) {
-      $roles = og_roles('node', 'hr_operation');
-      $rid = array_search('bundle member', $roles);
-      // Revoke bundle member from operation
-      og_role_revoke('node', $op_gid, $uid, $rid);
+  }
+  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor')) {
+    // Revoke role from all bundles
+    $bundles = _hr_bundles_get_bundles($gid);
+    $rid = _hr_bundles_og_role_load_by_name('hr_bundle', $role->name);
+    foreach ($bundles as $bundle) {
+      og_role_revoke('node', $bundle->nid, $uid, $rid);
     }
   }
 }
@@ -173,6 +198,14 @@ function hr_bundles_og_membership_delete(OgMembership $og_membership) {
     if ($group->type == 'hr_bundle') {
       $rid = _hr_bundles_og_role_load_by_name('hr_bundle', 'manager');
       hr_bundles_og_role_revoke('node', $og_membership->gid, $og_membership->etid, $rid);
+    }
+    elseif ($group->type == 'hr_operation') {
+      // Remove from all bundles
+      $bundles = _hr_bundles_get_bundles($og_membership->gid);
+      foreach ($bundles as $bundle) {
+        $og_membership = og_get_membership('node', $bundle->nid, 'user', $og_membership->etid);
+        og_membership_delete($og_membership->id);
+      }
     }
   }
 }
