@@ -27,6 +27,7 @@ features[ctools][] = strongarm:strongarm:1
 features[features_api][] = api:2
 features[feeds_importer][] = hr_bundles
 features[field_base][] = field_bundle_type
+features[field_base][] = field_bundles
 features[field_base][] = field_parent_cluster
 features[field_instance][] = node-hr_bundle-body
 features[field_instance][] = node-hr_bundle-field_bundle_type
