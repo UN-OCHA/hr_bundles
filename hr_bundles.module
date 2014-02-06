@@ -81,7 +81,8 @@ function hr_bundles_og_context_handler($node = NULL) {
  * Implements hook_form_BASE_FORM_ID_alter()
  */
 function hr_bundles_form_node_form_alter(&$form, &$form_state) {
-  if (isset($form['field_bundles'])) {
+  global $user;
+  if (isset($form['field_bundles']) && isset($form_state['entityreference_prepopulate'])) {
     // Get operation gid
     $type = $form_state['node']->type;
     $op_gid = $form_state['entityreference_prepopulate']['node'][$type][OG_AUDIENCE_FIELD][0];
@@ -90,7 +91,7 @@ function hr_bundles_form_node_form_alter(&$form, &$form_state) {
     $op = $op[$op_gid];
     if ($op->type == 'hr_operation') {
       $roles = og_get_user_roles('node', $op_gid);
-      if (!in_array('manager', $roles) && !in_array('editor', $roles)) {
+      if (!in_array('manager', $roles) && !in_array('editor', $roles) && $op->uid != $user->uid) {
         // If user is not a manager or editor of operation, make bundles field required
         $form['field_bundles'][LANGUAGE_NONE][0]['#required'] = TRUE;
         $form['field_bundles'][LANGUAGE_NONE][0]['default']['#required'] = TRUE;
