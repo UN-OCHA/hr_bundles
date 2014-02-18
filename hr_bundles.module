@@ -7,6 +7,16 @@
 include_once 'hr_bundles.features.inc';
 
 /**
+ * Implements hook_ctools_plugin_directory().
+ */
+function hr_bundles_ctools_plugin_directory($module, $plugin) {
+  if ($module == 'entityreference') {
+    return "plugins/entityreference/$plugin";
+  }
+}
+
+
+/**
  * Get operation from bundle GID
  */
 function _hr_bundles_get_operation($gid) {
@@ -37,7 +47,12 @@ function _hr_bundles_get_bundles($gid) {
     ->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $gid, '=')
     ->fieldCondition(OG_GROUP_FIELD, 'value', 1, '=')
     ->execute();
-  return entity_load('node', array_keys($entities['node']));
+  if (isset($entities['node'])) {
+    return entity_load('node', array_keys($entities['node']));
+  }
+  else {
+    return array();
+  }
 }
 
 /**
@@ -204,8 +219,10 @@ function hr_bundles_og_membership_delete(OgMembership $og_membership) {
       // Remove from all bundles
       $bundles = _hr_bundles_get_bundles($og_membership->gid);
       foreach ($bundles as $bundle) {
-        $og_membership = og_get_membership('node', $bundle->nid, 'user', $og_membership->etid);
-        og_membership_delete($og_membership->id);
+        $bundle_membership = og_get_membership('node', $bundle->nid, 'user', $og_membership->etid);
+        if (!empty($bundle_membership)) {
+          og_membership_delete($bundle_membership->id);
+        }
       }
     }
   }

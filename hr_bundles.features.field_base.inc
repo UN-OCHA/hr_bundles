@@ -81,6 +81,7 @@ function hr_bundles_field_default_field_bases() {
           'hr_bundle' => 'hr_bundle',
         ),
       ),
+      'profile2_private' => FALSE,
       'target_type' => 'node',
     ),
     'translatable' => 0,
