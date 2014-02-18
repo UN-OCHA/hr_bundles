@@ -139,7 +139,6 @@ function hr_bundles_strongarm() {
     'hr_bundles' => '-8',
     'node' => '-6',
     'comment' => '-4',
-    'og_extras' => '-2',
     'user-view' => '0',
     'user-edit' => '2',
   );
