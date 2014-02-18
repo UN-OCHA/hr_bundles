@@ -66,6 +66,7 @@ features[variable][] = og_features_settings_node_hr_bundle
 features[variable][] = panelizer_defaults_node_hr_bundle
 features[variable][] = panelizer_node:hr_bundle_allowed_layouts
 features[variable][] = panelizer_node:hr_bundle_allowed_layouts_default
+features[variable][] = panelizer_node:hr_bundle_allowed_types
 features[variable][] = panelizer_node:hr_bundle_allowed_types_default
 features[variable][] = panelizer_node:hr_bundle_default
 features[variable][] = pathauto_node_hr_bundle_pattern
