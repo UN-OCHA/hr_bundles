@@ -161,6 +161,27 @@ function hr_bundles_strongarm() {
   $strongarm = new stdClass();
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'og_menu_enable_hr_bundle';
+  $strongarm->value = 0;
+  $export['og_menu_enable_hr_bundle'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_menu_single_group_content__node__hr_bundle_hr_bundle';
+  $strongarm->value = 0;
+  $export['og_menu_single_group_content__node__hr_bundle_hr_bundle'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'og_menu_single_group__node__hr_bundle_hr_bundle';
+  $strongarm->value = 0;
+  $export['og_menu_single_group__node__hr_bundle_hr_bundle'] = $strongarm;
+
+  $strongarm = new stdClass();
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'panelizer_defaults_node_hr_bundle';
   $strongarm->value = array(
     'status' => 1,
@@ -176,11 +197,6 @@ function hr_bundles_strongarm() {
         'choice' => 0,
       ),
       'teaser' => array(
-        'status' => 0,
-        'default' => 0,
-        'choice' => 0,
-      ),
-      'search_result' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,
