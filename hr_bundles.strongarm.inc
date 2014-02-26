@@ -67,6 +67,18 @@ function hr_bundles_strongarm() {
         'title' => array(
           'weight' => '2',
         ),
+        'og_menu' => array(
+          'weight' => '1',
+        ),
+        'path' => array(
+          'weight' => '12',
+        ),
+        'redirect' => array(
+          'weight' => '11',
+        ),
+        'language' => array(
+          'weight' => '6',
+        ),
       ),
       'display' => array(),
     ),
