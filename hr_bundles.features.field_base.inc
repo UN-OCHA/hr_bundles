@@ -63,7 +63,7 @@ function hr_bundles_field_default_field_bases() {
     'module' => 'entityreference',
     'settings' => array(
       'entity_translation_sync' => FALSE,
-      'handler' => 'og',
+      'handler' => 'og_hr_bundles',
       'handler_settings' => array(
         'behaviors' => array(
           'og_behavior' => array(
