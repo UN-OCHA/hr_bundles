@@ -28,10 +28,10 @@ class OgHRBundlesSelectionHandler extends OgSelectionHandler {
    */
   public function buildEntityFieldQuery($match = NULL, $match_operator = 'CONTAINS') {
     $query = parent::buildEntityFieldQuery($match, $match_operator);
-    /*if (!empty($_GET[OG_AUDIENCE_FIELD])) {
+    if (!empty($_GET[OG_AUDIENCE_FIELD])) {
       $gid = $_GET[OG_AUDIENCE_FIELD];
-      $query->fieldCondition(OG_AUDIENCE_FIELD, 'value', $gid, '=');
-    }*/
+      $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $gid, '=');
+    }
 
     return $query;
   }
