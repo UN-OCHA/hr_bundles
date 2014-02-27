@@ -60,6 +60,26 @@ function hr_bundles_feeds_importer_default() {
             'target' => 'field_bundle_type',
             'unique' => FALSE,
           ),
+          4 => array(
+            'source' => 'Email',
+            'target' => 'field_email',
+            'unique' => FALSE,
+          ),
+          5 => array(
+            'source' => 'Social media',
+            'target' => 'field_social_media:url',
+            'unique' => FALSE,
+          ),
+          6 => array(
+            'source' => 'Mailchimp API key',
+            'target' => 'field_mailchimp_api_key',
+            'unique' => FALSE,
+          ),
+          7 => array(
+            'source' => 'Mailchimp List',
+            'target' => 'field_mailchimp_list',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',

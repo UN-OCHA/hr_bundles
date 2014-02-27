@@ -153,6 +153,103 @@ function hr_bundles_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-hr_bundle-field_mailchimp_api_key'
+  $field_instances['node-hr_bundle-field_mailchimp_api_key'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 10,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_mailchimp_api_key',
+    'label' => 'Mailchimp API key',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'enable' => 0,
+        'insert_plugin' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
+  // Exported field_instance: 'node-hr_bundle-field_mailchimp_list'
+  $field_instances['node-hr_bundle-field_mailchimp_list'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 11,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_mailchimp_list',
+    'label' => 'Mailchimp List',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'apply_chosen' => 1,
+      ),
+      'type' => 'options_select',
+      'weight' => 13,
+    ),
+  );
+
   // Exported field_instance: 'node-hr_bundle-field_parent_cluster'
   $field_instances['node-hr_bundle-field_parent_cluster'] = array(
     'bundle' => 'hr_bundle',
@@ -315,7 +412,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 14,
+      'weight' => 11,
     ),
   );
 
@@ -573,6 +670,8 @@ function hr_bundles_field_default_field_instances() {
   t('Email');
   t('Group');
   t('Groups audience');
+  t('Mailchimp API key');
+  t('Mailchimp List');
   t('Parent cluster');
   t('Sector');
   t('Social media');
