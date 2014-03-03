@@ -162,11 +162,12 @@ function hr_bundles_strongarm() {
   $strongarm->name = 'og_features_settings_node_hr_bundle';
   $strongarm->value = array(
     'hr_contacts' => '1',
-    'hr_documents' => '1',
     'hr_disasters' => '0',
+    'hr_documents' => '1',
     'hr_fundings' => '0',
     'hr_offices' => '0',
     'hr_pages' => '1',
+    'hr_users' => '0',
   );
   $export['og_features_settings_node_hr_bundle'] = $strongarm;
 
