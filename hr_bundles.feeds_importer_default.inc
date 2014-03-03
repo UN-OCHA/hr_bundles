@@ -75,6 +75,31 @@ function hr_bundles_feeds_importer_default() {
             'target' => 'field_mailchimp_list',
             'unique' => FALSE,
           ),
+          7 => array(
+            'source' => 'Lead Agencies',
+            'target' => 'field_organizations:label',
+            'unique' => FALSE,
+          ),
+          8 => array(
+            'source' => 'Partners',
+            'target' => 'field_partners:label',
+            'unique' => FALSE,
+          ),
+          9 => array(
+            'source' => 'NGO Participation',
+            'target' => 'field_ngo_participation',
+            'unique' => FALSE,
+          ),
+          10 => array(
+            'source' => 'Government Participation',
+            'target' => 'field_government_participation',
+            'unique' => FALSE,
+          ),
+          11 => array(
+            'source' => 'Intercluster',
+            'target' => 'field_inter_cluster',
+            'unique' => FALSE,
+          ),
         ),
         'update_existing' => '0',
         'input_format' => 'plain_text',
