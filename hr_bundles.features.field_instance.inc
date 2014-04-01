@@ -608,6 +608,7 @@ function hr_bundles_field_default_field_instances() {
   $field_instances['node-hr_bundle-field_sector'] = array(
     'bundle' => 'hr_bundle',
     'default_value' => NULL,
+    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -639,8 +640,8 @@ function hr_bundles_field_default_field_instances() {
     'required' => 0,
     'settings' => array(
       'behaviors' => array(
-        'taxonomy-index' => array(
-          'status' => TRUE,
+        'prepopulate' => array(
+          'status' => 0,
         ),
       ),
       'entity_translation_sync' => FALSE,

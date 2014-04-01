@@ -287,3 +287,31 @@ function hr_bundles_node_presave($node) {
     $node->og_menu = FALSE;
   }
 }
+
+/**
+ * Implements hook_openlayers_map_alter()
+ */
+function hr_bundles_openlayers_map_alter(&$map) {
+  if ($map['map_name'] == 'hr_bundles') {
+    $path = '/sites/all/themes/humanitarianresponse/assets/images/icons/38/Clusters/';
+    $images = array(
+      'hr_bundles_cccm' => 'CLU_camp-coordination-management.png',
+      'hr_bundles_education' => 'CLU_education.png',
+      'hr_bundles_er' => 'CLU_early-recovery.png',
+      'hr_bundles_es' => 'CLU_emergency-shelters.png',
+      'hr_bundles_et' => 'CLU_emergency-telecommunications.png',
+      'hr_bundles_fs' => 'CLU_food-security.png',
+      'hr_bundles_h' => 'CLU_health.png',
+      'hr_bundles_l' => 'CLU_logistics.png',
+      'hr_bundles_n' => 'CLU_nutrition.png',
+      'hr_bundles_p' => 'CLU_protection.png',
+      'hr_bundles_wash' => 'CLU_WASH.png',
+    );
+    foreach ($map['layers'] as $layer_name => &$layer) {
+      if (isset($images[$layer_name])) {
+        $title = $layer['title'];
+        $layer['title'] = theme('image', array('path' => $path.$images[$layer_name], 'alt' => $title, 'title' => $title));
+      }
+    }
+  }
+}
