@@ -19,6 +19,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/cccm',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -88,6 +89,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/e',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -157,6 +159,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/er',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -226,6 +229,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/es',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -295,6 +299,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/et',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -364,6 +369,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/fs',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -433,6 +439,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/h',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -502,6 +509,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/l',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -571,6 +579,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/n',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -640,6 +649,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/p',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
@@ -709,6 +719,7 @@ function hr_bundles_openlayers_layers() {
   $openlayers_layers->data = array(
     'url' => 'clusters/countries/geojson/wash',
     'useBBOX' => 0,
+    'preload' => 1,
     'resFactor' => '1',
     'useScript' => 0,
     'callbackKey' => '',
