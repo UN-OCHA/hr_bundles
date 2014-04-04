@@ -106,7 +106,7 @@ function hr_bundles_default_page_manager_pages() {
     $pane->uuid = 'df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd';
     $display->content['new-df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd'] = $pane;
     $display->panels['top'][1] = 'new-df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd';
-  $display->hide_title = PANELS_TITLE_FIXED;
+  $display->hide_title = PANELS_TITLE_NONE;
   $display->title_pane = 'new-067570d0-a210-4094-94fb-64762fb63b74';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
