@@ -289,7 +289,7 @@ function hr_bundles_node_presave($node) {
 }
 
 function hr_bundles_openlayers_map_preprocess_alter($map) {
-  if ($map['map_name'] == 'hr_bundles') {
+  if (isset($map['map_name']) && $map['map_name'] == 'hr_bundles') {
     drupal_add_js(drupal_get_path('module', 'hr_bundles').'/js/LayerSwitcherRadio.js', array('weight' => 50));
   }
 }
