@@ -636,7 +636,7 @@ function hr_bundles_field_default_field_instances() {
     ),
     'entity_type' => 'node',
     'field_name' => 'field_sector',
-    'label' => 'Sector',
+    'label' => 'Global Cluster',
     'required' => 0,
     'settings' => array(
       'behaviors' => array(
