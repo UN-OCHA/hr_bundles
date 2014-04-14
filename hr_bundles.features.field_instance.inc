@@ -976,6 +976,7 @@ function hr_bundles_field_default_field_instances() {
   t('Body');
   t('Determine if this is an OG group.');
   t('Email');
+  t('Global Cluster');
   t('Government Participation');
   t('Group');
   t('Groups audience');
@@ -986,7 +987,6 @@ function hr_bundles_field_default_field_instances() {
   t('NGO Participation');
   t('Parent cluster');
   t('Partners');
-  t('Sector');
   t('Social media');
   t('Title');
   t('Type');

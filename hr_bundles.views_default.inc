@@ -70,7 +70,7 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['og_group_ref']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Sector */
+  /* Field: Content: Global Cluster */
   $handler->display->display_options['fields']['field_sector']['id'] = 'field_sector';
   $handler->display->display_options['fields']['field_sector']['table'] = 'field_data_field_sector';
   $handler->display->display_options['fields']['field_sector']['field'] = 'field_sector';
@@ -80,7 +80,7 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['field_sector']['settings'] = array(
     'link' => 0,
   );
-  /* Sort criterion: Content: Sector (field_sector) */
+  /* Sort criterion: Content: Global Cluster (field_sector) */
   $handler->display->display_options['sorts']['field_sector_target_id']['id'] = 'field_sector_target_id';
   $handler->display->display_options['sorts']['field_sector_target_id']['table'] = 'field_data_field_sector';
   $handler->display->display_options['sorts']['field_sector_target_id']['field'] = 'field_sector_target_id';
