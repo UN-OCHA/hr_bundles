@@ -71,10 +71,10 @@ function hr_bundles_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '21',
+          'weight' => '22',
         ),
         'redirect' => array(
-          'weight' => '20',
+          'weight' => '21',
         ),
         'language' => array(
           'weight' => '12',

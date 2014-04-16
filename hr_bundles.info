@@ -66,6 +66,7 @@ features[field_instance][] = node-hr_bundle-field_partners
 features[field_instance][] = node-hr_bundle-field_sector
 features[field_instance][] = node-hr_bundle-field_social_media
 features[field_instance][] = node-hr_bundle-field_website
+features[field_instance][] = node-hr_bundle-group_access
 features[field_instance][] = node-hr_bundle-group_group
 features[field_instance][] = node-hr_bundle-og_group_ref
 features[field_instance][] = node-hr_bundle-title_field
