@@ -139,6 +139,7 @@ function hr_bundles_strongarm() {
     'url' => array(),
     'hr_bundles' => array(),
     'node' => array(),
+    'hr_core' => array(),
   );
   $export['og_context_negotiation_group_context'] = $strongarm;
 
@@ -148,11 +149,12 @@ function hr_bundles_strongarm() {
   $strongarm->name = 'og_context_providers_weight_group_context';
   $strongarm->value = array(
     'url' => '-10',
-    'hr_bundles' => '-8',
-    'node' => '-6',
-    'comment' => '-4',
-    'user-view' => '0',
-    'user-edit' => '2',
+    'hr_bundles' => '-9',
+    'node' => '-8',
+    'hr_core' => '-7',
+    'comment' => '-5',
+    'user-view' => '-4',
+    'user-edit' => '-3',
   );
   $export['og_context_providers_weight_group_context'] = $strongarm;
 
