@@ -111,6 +111,14 @@ function hr_bundles_form_node_form_alter(&$form, &$form_state) {
         $form['field_bundles'][LANGUAGE_NONE][0]['#required'] = TRUE;
         $form['field_bundles'][LANGUAGE_NONE][0]['default']['#required'] = TRUE;
       }
+      // If we are within an operation, hide the global clusters field
+      if (isset($form['field_sectors'])) {
+        $form['field_sectors']['#attributes']['class'][] = 'hidden';
+      }
+    }
+    else {
+      // Otherwise hide the bundles field
+      $form['field_bundles']['#attributes']['class'][] = 'hidden';
     }
   }
 }
