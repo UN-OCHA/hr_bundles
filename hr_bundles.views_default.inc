@@ -129,6 +129,12 @@ function hr_bundles_views_default_views() {
 
   /* Display: GeoJSON */
   $handler = $view->new_display('page', 'GeoJSON', 'geojson');
+  $handler->display->display_options['defaults']['cache'] = FALSE;
+  $handler->display->display_options['cache']['type'] = 'time';
+  $handler->display->display_options['cache']['results_lifespan'] = '21600';
+  $handler->display->display_options['cache']['results_lifespan_custom'] = '0';
+  $handler->display->display_options['cache']['output_lifespan'] = '21600';
+  $handler->display->display_options['cache']['output_lifespan_custom'] = '0';
   $handler->display->display_options['defaults']['style_plugin'] = FALSE;
   $handler->display->display_options['style_plugin'] = 'views_geojson';
   $handler->display->display_options['style_options']['data_source']['value'] = 'wkt';
@@ -237,10 +243,13 @@ Co-leads: [field_partners]';
   $handler->display->display_options['fields']['field_activation_document']['table'] = 'field_data_field_activation_document';
   $handler->display->display_options['fields']['field_activation_document']['field'] = 'field_activation_document';
   $handler->display->display_options['fields']['field_activation_document']['label'] = '';
+  $handler->display->display_options['fields']['field_activation_document']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field_activation_document']['alter']['path'] = 'node/[field_activation_document-target_id]';
+  $handler->display->display_options['fields']['field_activation_document']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['field_activation_document']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_activation_document']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['field_activation_document']['settings'] = array(
-    'link' => 1,
+    'link' => 0,
   );
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
