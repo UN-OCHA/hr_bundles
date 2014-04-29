@@ -173,6 +173,7 @@ function hr_bundles_strongarm() {
     'hr_offices' => '0',
     'hr_pages' => '1',
     'hr_users' => '0',
+    'hr_webforms' => '0',
   );
   $export['og_features_settings_node_hr_bundle'] = $strongarm;
 
