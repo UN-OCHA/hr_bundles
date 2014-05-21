@@ -205,17 +205,16 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['title_field']['alter']['text'] = '[title_field] ([title])';
   $handler->display->display_options['fields']['title_field']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['title_field']['link_to_entity'] = 0;
-  /* Field: Taxonomy term: Geospatial data */
-  $handler->display->display_options['fields']['field_geo_data']['id'] = 'field_geo_data';
-  $handler->display->display_options['fields']['field_geo_data']['table'] = 'field_data_field_geo_data';
-  $handler->display->display_options['fields']['field_geo_data']['field'] = 'field_geo_data';
-  $handler->display->display_options['fields']['field_geo_data']['relationship'] = 'field_country_target_id';
-  $handler->display->display_options['fields']['field_geo_data']['label'] = '';
-  $handler->display->display_options['fields']['field_geo_data']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_geo_data']['hide_empty'] = TRUE;
-  $handler->display->display_options['fields']['field_geo_data']['type'] = 'wkt';
-  $handler->display->display_options['fields']['field_geo_data']['settings'] = array(
-    'map' => 'default',
+  /* Field: Taxonomy term: Geofield */
+  $handler->display->display_options['fields']['field_geofield']['id'] = 'field_geofield';
+  $handler->display->display_options['fields']['field_geofield']['table'] = 'field_data_field_geofield';
+  $handler->display->display_options['fields']['field_geofield']['field'] = 'field_geofield';
+  $handler->display->display_options['fields']['field_geofield']['relationship'] = 'field_country_target_id';
+  $handler->display->display_options['fields']['field_geofield']['label'] = '';
+  $handler->display->display_options['fields']['field_geofield']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_geofield']['click_sort_column'] = 'geom';
+  $handler->display->display_options['fields']['field_geofield']['settings'] = array(
+    'data' => 'full',
   );
   /* Field: Field: Organization */
   $handler->display->display_options['fields']['field_organizations']['id'] = 'field_organizations';
