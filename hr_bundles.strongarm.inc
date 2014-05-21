@@ -71,13 +71,13 @@ function hr_bundles_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '25',
+          'weight' => '23',
         ),
         'redirect' => array(
-          'weight' => '24',
+          'weight' => '22',
         ),
         'language' => array(
-          'weight' => '15',
+          'weight' => '13',
         ),
       ),
       'display' => array(),
@@ -216,6 +216,11 @@ function hr_bundles_strongarm() {
         'choice' => 0,
       ),
       'teaser' => array(
+        'status' => 0,
+        'default' => 0,
+        'choice' => 0,
+      ),
+      'search_result' => array(
         'status' => 0,
         'default' => 0,
         'choice' => 0,

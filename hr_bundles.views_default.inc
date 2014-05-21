@@ -250,35 +250,6 @@ Co-leads: [field_partners]';
   $handler->display->display_options['fields']['field_activation_document']['settings'] = array(
     'link' => 0,
   );
-  /* Field: Content: Cluster coordinator */
-  $handler->display->display_options['fields']['field_cluster_coordinator']['id'] = 'field_cluster_coordinator';
-  $handler->display->display_options['fields']['field_cluster_coordinator']['table'] = 'field_data_field_cluster_coordinator';
-  $handler->display->display_options['fields']['field_cluster_coordinator']['field'] = 'field_cluster_coordinator';
-  $handler->display->display_options['fields']['field_cluster_coordinator']['label'] = '';
-  $handler->display->display_options['fields']['field_cluster_coordinator']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator']['alter']['path'] = 'user/[field_cluster_coordinator-target_id]';
-  $handler->display->display_options['fields']['field_cluster_coordinator']['alter']['absolute'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator']['element_label_colon'] = FALSE;
-  $handler->display->display_options['fields']['field_cluster_coordinator']['settings'] = array(
-    'link' => 0,
-  );
-  /* Field: Content: Cluster coordinator email */
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['id'] = 'field_cluster_coordinator_email';
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['table'] = 'field_data_field_cluster_coordinator_email';
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['field'] = 'field_cluster_coordinator_email';
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['label'] = '';
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['alter']['text'] = '([field_cluster_coordinator_email])';
-  $handler->display->display_options['fields']['field_cluster_coordinator_email']['element_label_colon'] = FALSE;
-  /* Field: Content: Cluster coordinator name */
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['id'] = 'field_cluster_coordinator_name';
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['table'] = 'field_data_field_cluster_coordinator_name';
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['field'] = 'field_cluster_coordinator_name';
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['label'] = '';
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['exclude'] = TRUE;
-  $handler->display->display_options['fields']['field_cluster_coordinator_name']['element_label_colon'] = FALSE;
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -286,8 +257,7 @@ Co-leads: [field_partners]';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<strong>Lead Agencies</strong>: [field_organizations]<br />
 <strong>Co-leads</strong>: [field_partners]<br />
-<strong>Activation document</strong>: [field_activation_document]<br />
-<strong>Cluster coordinator</strong>: [field_cluster_coordinator] [field_cluster_coordinator_name] [field_cluster_coordinator_email]';
+<strong>Activation document</strong>: [field_activation_document]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -359,11 +329,9 @@ Co-leads: [field_partners]';
     t('Partners'),
     t('Lead Agencies: [field_organizations]<br />
 Co-leads: [field_partners]'),
-    t('([field_cluster_coordinator_email])'),
     t('<strong>Lead Agencies</strong>: [field_organizations]<br />
 <strong>Co-leads</strong>: [field_partners]<br />
-<strong>Activation document</strong>: [field_activation_document]<br />
-<strong>Cluster coordinator</strong>: [field_cluster_coordinator] [field_cluster_coordinator_name] [field_cluster_coordinator_email]'),
+<strong>Activation document</strong>: [field_activation_document]'),
     t('All'),
     t('Text'),
   );
