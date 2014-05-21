@@ -57,7 +57,7 @@ function hr_bundles_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 15,
+      'weight' => 18,
     ),
   );
 
@@ -163,6 +163,159 @@ function hr_bundles_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-hr_bundle-field_cluster_coordinator'
+  $field_instances['node-hr_bundle-field_cluster_coordinator'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => NULL,
+    'default_value_function' => '',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 19,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_cluster_coordinator',
+    'label' => 'Cluster coordinator',
+    'required' => 0,
+    'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 0,
+        ),
+      ),
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete',
+      'weight' => 11,
+    ),
+  );
+
+  // Exported field_instance: 'node-hr_bundle-field_cluster_coordinator_email'
+  $field_instances['node-hr_bundle-field_cluster_coordinator_email'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Fill this in ONLY if you can not find the cluster coordinator',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'email',
+        'settings' => array(),
+        'type' => 'email_default',
+        'weight' => 21,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_cluster_coordinator_email',
+    'label' => 'Cluster coordinator email',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'email',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'email_textfield',
+      'weight' => 13,
+    ),
+  );
+
+  // Exported field_instance: 'node-hr_bundle-field_cluster_coordinator_name'
+  $field_instances['node-hr_bundle-field_cluster_coordinator_name'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => 'Fill this in ONLY if you can not find the cluster coordinator in the field above',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 20,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_cluster_coordinator_name',
+    'label' => 'Cluster coordinator name',
+    'required' => 0,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'linkit' => array(
+        'enable' => 0,
+        'insert_plugin' => '',
+      ),
+      'text_processing' => 0,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'size' => 60,
+      ),
+      'type' => 'text_textfield',
+      'weight' => 12,
+    ),
+  );
+
   // Exported field_instance: 'node-hr_bundle-field_email'
   $field_instances['node-hr_bundle-field_email'] = array(
     'bundle' => 'hr_bundle',
@@ -205,7 +358,7 @@ function hr_bundles_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 17,
+      'weight' => 20,
     ),
   );
 
@@ -344,7 +497,7 @@ function hr_bundles_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 19,
+      'weight' => 22,
     ),
   );
 
@@ -390,7 +543,7 @@ function hr_bundles_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 20,
+      'weight' => 23,
     ),
   );
 
@@ -719,7 +872,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 18,
+      'weight' => 21,
     ),
   );
 
@@ -780,7 +933,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 16,
+      'weight' => 19,
     ),
   );
 
@@ -837,7 +990,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 13,
+      'weight' => 16,
     ),
     'widget_type' => 'options_select',
   );
@@ -904,7 +1057,7 @@ function hr_bundles_field_default_field_instances() {
         'og_hide' => 0,
       ),
       'type' => 'options_onoff',
-      'weight' => 11,
+      'weight' => 14,
     ),
   );
 
@@ -975,7 +1128,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 14,
+      'weight' => 17,
     ),
   );
 
@@ -1032,8 +1185,13 @@ function hr_bundles_field_default_field_instances() {
   // Included for use with string extractors like potx.
   t('Activation Document');
   t('Body');
+  t('Cluster coordinator');
+  t('Cluster coordinator email');
+  t('Cluster coordinator name');
   t('Determine if this is an OG group.');
   t('Email');
+  t('Fill this in ONLY if you can not find the cluster coordinator');
+  t('Fill this in ONLY if you can not find the cluster coordinator in the field above');
   t('Global Cluster');
   t('Government Participation');
   t('Group');
