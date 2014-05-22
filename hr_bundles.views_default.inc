@@ -250,6 +250,18 @@ Co-leads: [field_partners]';
   $handler->display->display_options['fields']['field_activation_document']['settings'] = array(
     'link' => 0,
   );
+  /* Field: Content: Cluster coordinators */
+  $handler->display->display_options['fields']['field_cluster_coordinators']['id'] = 'field_cluster_coordinators';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['table'] = 'field_data_field_cluster_coordinators';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['field'] = 'field_cluster_coordinators';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['label'] = '';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_cluster_coordinators']['type'] = 'field_collection_fields';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['settings'] = array(
+    'view_mode' => 'full',
+  );
+  $handler->display->display_options['fields']['field_cluster_coordinators']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_cluster_coordinators']['multi_type'] = 'ul';
   /* Field: Global: Custom text */
   $handler->display->display_options['fields']['nothing']['id'] = 'nothing';
   $handler->display->display_options['fields']['nothing']['table'] = 'views';
@@ -257,7 +269,8 @@ Co-leads: [field_partners]';
   $handler->display->display_options['fields']['nothing']['label'] = '';
   $handler->display->display_options['fields']['nothing']['alter']['text'] = '<strong>Lead Agencies</strong>: [field_organizations]<br />
 <strong>Co-leads</strong>: [field_partners]<br />
-<strong>Activation document</strong>: [field_activation_document]';
+<strong>Activation document</strong>: [field_activation_document]<br />
+<strong>Cluster coordinators</strong>: [field_cluster_coordinators]';
   $handler->display->display_options['fields']['nothing']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['sorts'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
@@ -331,7 +344,8 @@ Co-leads: [field_partners]';
 Co-leads: [field_partners]'),
     t('<strong>Lead Agencies</strong>: [field_organizations]<br />
 <strong>Co-leads</strong>: [field_partners]<br />
-<strong>Activation document</strong>: [field_activation_document]'),
+<strong>Activation document</strong>: [field_activation_document]<br />
+<strong>Cluster coordinators</strong>: [field_cluster_coordinators]'),
     t('All'),
     t('Text'),
   );
