@@ -70,5 +70,32 @@ function hr_bundles_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hr_operation:create hr_bundle content'
+  $permissions['node:hr_operation:create hr_bundle content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hr_operation:delete any hr_bundle content'
+  $permissions['node:hr_operation:delete any hr_bundle content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hr_operation:delete own hr_bundle content'
+  $permissions['node:hr_operation:delete own hr_bundle content'] = array(
+    'roles' => array(),
+  );
+
+  // Exported og permission: 'node:hr_operation:update any hr_bundle content'
+  $permissions['node:hr_operation:update any hr_bundle content'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_operation:update own hr_bundle content'
+  $permissions['node:hr_operation:update own hr_bundle content'] = array(
+    'roles' => array(),
+  );
+
   return $permissions;
 }
