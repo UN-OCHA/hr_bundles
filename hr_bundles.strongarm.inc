@@ -169,6 +169,7 @@ function hr_bundles_strongarm() {
     'hr_documents' => '1',
     'hr_events' => '1',
     'hr_fundings' => '0',
+    'hr_infographics' => '1',
     'hr_news' => '1',
     'hr_offices' => '0',
     'hr_pages' => '1',
