@@ -163,6 +163,7 @@ function hr_bundles_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'og_features_settings_node_hr_bundle';
   $strongarm->value = array(
+    'hr_assessments' => '1',
     'hr_contacts' => '1',
     'hr_datasets' => '0',
     'hr_disasters' => '0',
