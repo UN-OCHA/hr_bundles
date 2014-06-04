@@ -32,6 +32,13 @@ class OgHRBundlesSelectionHandler extends OgSelectionHandler {
       $gid = $_GET[OG_AUDIENCE_FIELD];
       $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $gid, '=');
     }
+    else {
+      if (isset($this->entity)) {
+        $field = $this->entity->{OG_AUDIENCE_FIELD};
+        $gid = $field[LANGUAGE_NONE][0]['target_id'];
+        $query->fieldCondition(OG_AUDIENCE_FIELD, 'target_id', $gid, '=');
+      }
+    }
 
     return $query;
   }
