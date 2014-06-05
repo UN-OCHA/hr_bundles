@@ -88,10 +88,11 @@ function hr_bundles_og_context_handler($node = NULL) {
       $node = node_load($gid);
       if ($node->type == 'hr_operation') {
         $operation = $node;
+        break;
       }
     }
     if ($operation != NULL) {
-      $context['node'][0] = $operation->nid;
+      array_unshift($context['node'], $operation->nid);
     }
     else {
       $gid = reset($context['node']);
