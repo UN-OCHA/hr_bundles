@@ -59,7 +59,7 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['field_website']['empty'] = '[path]';
   $handler->display->display_options['fields']['field_website']['click_sort_column'] = 'url';
   $handler->display->display_options['fields']['field_website']['type'] = 'link_absolute';
-  /* Field: Content: Groups audience */
+  /* Field: Content: Space(s) */
   $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
   $handler->display->display_options['fields']['og_group_ref']['field'] = 'og_group_ref';
@@ -321,6 +321,76 @@ Co-leads: [field_partners]';
   $handler = $view->new_display('panel_pane', 'Text', 'text');
   $handler->display->display_options['defaults']['css_class'] = FALSE;
   $handler->display->display_options['css_class'] = 'views-catgroup';
+
+  /* Display: Entity Reference */
+  $handler = $view->new_display('entityreference', 'Entity Reference', 'entityreference_1');
+  $handler->display->display_options['defaults']['title'] = FALSE;
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
+  $handler->display->display_options['style_plugin'] = 'entityreference_style';
+  $handler->display->display_options['style_options']['grouping'] = array(
+    0 => array(
+      'field' => 'og_group_ref',
+      'rendered' => 1,
+      'rendered_strip' => 0,
+    ),
+  );
+  $handler->display->display_options['style_options']['search_fields'] = array(
+    'title' => 'title',
+    'og_group_ref' => 0,
+  );
+  $handler->display->display_options['defaults']['style_options'] = FALSE;
+  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'entityreference_fields';
+  $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['relationships'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Content: Space(s) */
+  $handler->display->display_options['fields']['og_group_ref']['id'] = 'og_group_ref';
+  $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
+  $handler->display->display_options['fields']['og_group_ref']['field'] = 'og_group_ref';
+  $handler->display->display_options['fields']['og_group_ref']['label'] = '';
+  $handler->display->display_options['fields']['og_group_ref']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['og_group_ref']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['og_group_ref']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
+  /* Field: Content: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'node';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = '';
+  $handler->display->display_options['fields']['title']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title']['alter']['text'] = '[title] ([og_group_ref])';
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Space(s) (og_group_ref) */
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['id'] = 'og_group_ref_target_id';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['table'] = 'og_membership';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['field'] = 'og_group_ref_target_id';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['default_argument_type'] = 'fixed';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['og_group_ref_target_id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Content: Published */
+  $handler->display->display_options['filters']['status']['id'] = 'status';
+  $handler->display->display_options['filters']['status']['table'] = 'node';
+  $handler->display->display_options['filters']['status']['field'] = 'status';
+  $handler->display->display_options['filters']['status']['value'] = 1;
+  $handler->display->display_options['filters']['status']['group'] = 1;
+  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
+  /* Filter criterion: Content: Type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'node';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'hr_bundle' => 'hr_bundle',
+  );
   $translatables['hr_bundles'] = array(
     t('Master'),
     t('more'),
@@ -348,6 +418,8 @@ Co-leads: [field_partners]'),
 <strong>Cluster coordinators</strong>: [field_cluster_coordinators]'),
     t('All'),
     t('Text'),
+    t('Entity Reference'),
+    t('[title] ([og_group_ref])'),
   );
   $export['hr_bundles'] = $view;
 

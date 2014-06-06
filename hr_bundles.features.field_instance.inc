@@ -693,6 +693,7 @@ function hr_bundles_field_default_field_instances() {
   $field_instances['node-hr_bundle-field_parent_cluster'] = array(
     'bundle' => 'hr_bundle',
     'default_value' => NULL,
+    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -723,6 +724,11 @@ function hr_bundles_field_default_field_instances() {
     'label' => 'Parent cluster',
     'required' => 0,
     'settings' => array(
+      'behaviors' => array(
+        'prepopulate' => array(
+          'status' => 0,
+        ),
+      ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
