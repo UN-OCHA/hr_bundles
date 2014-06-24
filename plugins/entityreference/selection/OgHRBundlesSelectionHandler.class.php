@@ -42,4 +42,14 @@ class OgHRBundlesSelectionHandler extends OgSelectionHandler {
 
     return $query;
   }
+
+  /**
+   * Overrides EntityReferenceHandler::getLabel().
+   */
+  public function getLabel($entity) {
+    $target_type = $this->field['settings']['target_type'];
+    return entity_access('view', $target_type, $entity) ? entity_label($target_type, $entity).'(123)' : t('- Restricted access -');
+  }
+
+
 }
