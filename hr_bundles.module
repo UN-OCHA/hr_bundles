@@ -161,7 +161,7 @@ function hr_bundles_og_role_grant($entity_type, $gid, $uid, $rid) {
       }
     }
   }
-  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor')) {
+  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor' || $role->name == 'contributor')) {
     // Grant role on all bundles
     $bundles = _hr_bundles_get_bundles($gid);
     $rid = _hr_bundles_og_role_load_by_name('hr_bundle', $role->name);
@@ -214,7 +214,7 @@ function hr_bundles_og_role_revoke($entity_type, $gid, $uid, $rid) {
       }
     }
   }
-  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor')) {
+  elseif ($group->type == 'hr_operation' && ($role->name == 'manager' || $role->name == 'editor' || $role->name == 'contributor')) {
     // Revoke role from all bundles
     $bundles = _hr_bundles_get_bundles($gid);
     $rid = _hr_bundles_og_role_load_by_name('hr_bundle', $role->name);
