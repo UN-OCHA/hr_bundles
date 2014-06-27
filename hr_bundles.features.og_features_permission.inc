@@ -54,6 +54,13 @@ function hr_bundles_og_features_default_permissions() {
     ),
   );
 
+  // Exported og permission: 'node:hr_bundle:assign contributor role'
+  $permissions['node:hr_bundle:assign contributor role'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+    ),
+  );
+
   // Exported og permission: 'node:hr_bundle:create hr_contact content'
   $permissions['node:hr_bundle:create hr_contact content'] = array(
     'roles' => array(

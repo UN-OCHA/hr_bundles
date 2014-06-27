@@ -26,5 +26,13 @@ function hr_bundles_og_features_default_roles() {
     'name' => 'manager',
   );
 
+  // Exported OG Role: 'node:hr_bundle:contributor'.
+  $roles['node:hr_bundle:contributor'] = array(
+    'gid' => 0,
+    'group_type' => 'node',
+    'group_bundle' => 'hr_bundle',
+    'name' => 'contributor',
+  );
+
   return $roles;
 }
