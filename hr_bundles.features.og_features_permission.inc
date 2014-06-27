@@ -144,5 +144,22 @@ function hr_bundles_og_features_default_permissions() {
     'roles' => array(),
   );
 
+  // Exported og permission: 'node:hr_bundle:publish any content'
+  $permissions['node:hr_bundle:publish any content'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+      'editor' => 'editor',
+    ),
+  );
+
+  // Exported og permission: 'node:hr_bundle:unpublish any content'
+  $permissions['node:hr_bundle:unpublish any content'] = array(
+    'roles' => array(
+      'manager' => 'manager',
+      'editor' => 'editor',
+    ),
+  );
+
+
   return $permissions;
 }
