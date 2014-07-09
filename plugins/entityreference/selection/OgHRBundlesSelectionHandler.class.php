@@ -50,7 +50,8 @@ class OgHRBundlesSelectionHandler extends OgSelectionHandler {
     $target_type = $this->field['settings']['target_type'];
     $field = $entity->{OG_AUDIENCE_FIELD};
     $gid = $field[LANGUAGE_NONE][0]['target_id'];
-    $group = reset(entity_load('node', array($gid)));
+    $gids = array($gid);
+    $group = reset(entity_load('node', $gids));
     return entity_access('view', $target_type, $entity) ? entity_label($target_type, $entity).' ('.entity_label('node', $group).')' : t('- Restricted access -');
   }
 
