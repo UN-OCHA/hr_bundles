@@ -29,7 +29,7 @@ function hr_bundles_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'entity_translation_settings_node__hr_bundle';
   $strongarm->value = array(
-    'default_language' => 'xx-et-default',
+    'default_language' => 'xx-et-current',
     'hide_language_selector' => 0,
     'exclude_language_none' => 1,
     'lock_language' => 1,
