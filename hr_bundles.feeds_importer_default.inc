@@ -18,12 +18,15 @@ function hr_bundles_feeds_importer_default() {
     'name' => 'Bundles',
     'description' => 'Import bundles from a CSV file',
     'fetcher' => array(
-      'plugin_key' => 'FeedsHTTPFetcher',
+      'plugin_key' => 'FeedsFileFetcher',
       'config' => array(
-        'auto_detect_feeds' => FALSE,
-        'use_pubsubhubbub' => FALSE,
-        'designated_hub' => '',
-        'request_timeout' => NULL,
+        'allowed_extensions' => 'txt csv tsv xml opml',
+        'direct' => FALSE,
+        'directory' => 'private://feeds',
+        'allowed_schemes' => array(
+          0 => 'public',
+          1 => 'private',
+        ),
       ),
     ),
     'parser' => array(
@@ -41,64 +44,79 @@ function hr_bundles_feeds_importer_default() {
         'authorize' => 1,
         'mappings' => array(
           0 => array(
-            'source' => 'Name',
+            'source' => 'Name:en',
             'target' => 'title',
             'unique' => FALSE,
           ),
           1 => array(
+            'source' => 'Name:en',
+            'target' => 'title_field:et:en',
+            'unique' => FALSE,
+          ),
+          2 => array(
+            'source' => 'Name:fr',
+            'target' => 'title_field:et:fr',
+            'unique' => FALSE,
+          ),
+          3 => array(
             'source' => 'Sector',
             'target' => 'field_sector:label',
             'unique' => FALSE,
           ),
-          2 => array(
+          4 => array(
             'source' => 'Operation',
             'target' => 'og_group_ref:label',
             'unique' => FALSE,
           ),
-          3 => array(
+          5 => array(
             'source' => 'Type',
             'target' => 'field_bundle_type',
             'unique' => FALSE,
           ),
-          4 => array(
+          6 => array(
             'source' => 'Email',
             'target' => 'field_email',
             'unique' => FALSE,
           ),
-          5 => array(
+          7 => array(
             'source' => 'Mailchimp API key',
             'target' => 'field_mailchimp_api_key',
             'unique' => FALSE,
           ),
-          6 => array(
+          8 => array(
             'source' => 'Mailchimp List',
             'target' => 'field_mailchimp_list',
             'unique' => FALSE,
           ),
-          7 => array(
+          9 => array(
             'source' => 'Lead Agencies',
             'target' => 'field_organizations:label',
             'unique' => FALSE,
           ),
-          8 => array(
+          10 => array(
             'source' => 'Partners',
             'target' => 'field_partners:label',
             'unique' => FALSE,
           ),
-          9 => array(
+          11 => array(
             'source' => 'NGO Participation',
             'target' => 'field_ngo_participation',
             'unique' => FALSE,
           ),
-          10 => array(
+          12 => array(
             'source' => 'Government Participation',
             'target' => 'field_government_participation',
             'unique' => FALSE,
           ),
-          11 => array(
+          13 => array(
             'source' => 'Intercluster',
             'target' => 'field_inter_cluster',
             'unique' => FALSE,
+          ),
+          14 => array(
+            'source' => 'Path',
+            'target' => 'path_alias',
+            'pathauto_override' => 1,
           ),
         ),
         'update_existing' => '0',
