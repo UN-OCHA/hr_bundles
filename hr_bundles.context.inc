@@ -25,9 +25,6 @@ function hr_bundles_context_default_contexts() {
     ),
   );
   $context->reactions = array(
-    'context_og_reaction_set_group_context' => array(
-      'group' => '12',
-    ),
     'disable_context' => array(
       'disabled' => array(
         'hr_space_menu' => 'hr_space_menu',

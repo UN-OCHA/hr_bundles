@@ -335,3 +335,16 @@ function hr_bundles_openlayers_behaviors() {
     ),
   );
 }
+
+/**
+ * Implements hook_init()
+ * Sets cluster context in countries and global pages
+ */
+function hr_bundles_init() {
+  $path = current_path();
+  $paths = array('coordination/clusters/countries', 'coordination/clusters/global');
+  if (in_array($path, $paths)) {
+    $group = node_load(12);
+    og_context('node', $group);
+  }
+}
