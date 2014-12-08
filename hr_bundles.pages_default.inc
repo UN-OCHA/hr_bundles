@@ -15,7 +15,7 @@ function hr_bundles_default_page_manager_pages() {
   $page->task = 'page';
   $page->admin_title = 'Bundles';
   $page->admin_description = '';
-  $page->path = 'clusters/countries';
+  $page->path = 'coordination/clusters/countries';
   $page->access = array(
     'type' => 'none',
     'settings' => NULL,
