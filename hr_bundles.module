@@ -13,6 +13,9 @@ function hr_bundles_ctools_plugin_directory($module, $plugin) {
   if ($module == 'entityreference') {
     return "plugins/entityreference/$plugin";
   }
+  if ($module == 'restful') {
+    return 'plugins/' . $plugin;
+  }
 }
 
 
