@@ -1,4 +1,5 @@
-(function($) {
+var $j = $.noConflict(true);
+$j(function($) {
   $(document).ready(function() {
 
     var baseurl = window.location.protocol + '//' + window.location.host + '/';
