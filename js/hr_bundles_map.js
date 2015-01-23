@@ -115,7 +115,6 @@
             }
             //Cluster coordinators
             if(result.cluster_coordinators != null) {
-              console.log(result);
               result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
               $.each(result.cluster_coordinators, function(i, val) {
                 if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
@@ -138,7 +137,6 @@
 
 
       $(countriesMap).each(function(i) {
-      // console.log(countriesMap[i]);
         // Set country code
         if(countriesMap[i].country != null) {
           countriesMap[i].mapCode = countriesMap[i].country.pcode;
