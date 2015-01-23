@@ -45,6 +45,7 @@ class RestfulEntityNodeBundles extends \RestfulEntityBaseNode {
       'resource' => array(
         'hr_sector' => 'global_clusters',
       ),
+      'process_callbacks' => array(array($this, 'getEntity')),
     );
 
     $public_fields['lead_agencies'] = array(
@@ -52,6 +53,7 @@ class RestfulEntityNodeBundles extends \RestfulEntityBaseNode {
       'resource' => array(
         'hr_organization' => 'organizations',
       ),
+      'process_callbacks' => array(array($this, 'getEntity')),
     );
 
     $public_fields['partners'] = array(
@@ -59,6 +61,20 @@ class RestfulEntityNodeBundles extends \RestfulEntityBaseNode {
       'resource' => array(
         'hr_organization' => 'organizations',
       ),
+      'process_callbacks' => array(array($this, 'getEntity')),
+    );
+
+    $public_fields['activation_document'] = array(
+      'property' => 'field_activation_document',
+      'resource' => array(
+        'hr_document' => 'documents',
+      ),
+      'process_callbacks' => array(array($this, 'getEntity')),
+    );
+
+    $public_fields['cluster_coordinators'] = array(
+      'property' => 'field_cluster_coordinators',
+      'process_callbacks' => array(array($this, 'getClusterCoordinators')),
     );
 
     $public_fields['operation'] = array(
@@ -66,9 +82,59 @@ class RestfulEntityNodeBundles extends \RestfulEntityBaseNode {
       'resource' => array(
         'hr_operation' => 'operations',
       ),
+      'process_callbacks' => array(array($this, 'getEntity')),
     );
 
     return $public_fields;
+  }
+
+  protected function getEntity($wrapper) {
+    $single = FALSE;
+    foreach ($wrapper as $id => &$item) {
+      if (is_string($item) || $single == TRUE) {
+        if ($single == FALSE) {
+          $single = TRUE;
+        }
+        if (!in_array($id, array('id', 'label', 'self'))) {
+          unset($wrapper[$id]);
+        }
+      }
+      else {
+        $array_item = (array)$item;
+        $properties = array_keys($array_item);
+        foreach ($properties as $property) {
+          if (!in_array($property, array('id', 'label', 'self'))) {
+            unset($array_item[$property]);
+          }
+        }
+        $item = (object)$array_item;
+      }
+    }
+    return $wrapper;
+  }
+
+  protected function getClusterCoordinators($wrapper) {
+    $return  = array();
+    if (!empty($wrapper)) {
+      foreach ($wrapper as $item) {
+        $tmp = new stdClass();
+        if (!empty($item->field_cluster_coordinator)) {
+          $account = user_load($item->field_cluster_coordinator[LANGUAGE_NONE][0]['target_id']);
+          $tmp->name = $account->realname;
+          $tmp->email = $account->mail;
+        }
+        else {
+          if (!empty($item->field_cluster_coordinator_name)) {
+            $tmp->name = $item->field_cluster_coordinator_name[LANGUAGE_NONE][0]['value'];
+          }
+          if (!empty($item->field_email)) {
+            $tmp->email = $item->field_email[LANGUAGE_NONE][0]['email'];
+          }
+        }
+        $return[] = $tmp;
+      }
+    }
+    return $return;
   }
 
 }
