@@ -1,5 +1,4 @@
-var $j = jQuery.noConflict(true);
-$j(function($) {
+(function($) {
   $(document).ready(function() {
 
     var baseurl = window.location.protocol + '//' + window.location.host + '/';
@@ -233,4 +232,4 @@ $j(function($) {
     });
 
   });
-});
+})(jQuery);
