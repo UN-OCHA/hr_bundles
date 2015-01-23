@@ -66,7 +66,7 @@ function _hr_bundles_og_role_load_by_name($bundle, $name) {
   $rid = array_search($name, $roles);
   return $rid;
 }
-    
+
 
 /**
  * Implements hook_og_context_negotiation_info().
@@ -350,4 +350,38 @@ function hr_bundles_init() {
     $group = node_load(12);
     og_context('node', $group);
   }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function hr_bundles_block_info() {
+  $blocks['clusters_map'] = array(
+    'info' => t('Clusters Map'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function hr_bundles_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'clusters_map':
+      drupal_add_js('https://code.highcharts.com/maps/highmaps.js', 'external');
+      drupal_add_js('http://code.highcharts.com/maps/modules/exporting.js', 'external');
+      drupal_add_js('https://code.highcharts.com/mapdata/custom/world.js', 'external');
+      drupal_add_js(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
+
+      $block['content']= '<div id="clusters-map" class="loading"></div>';
+      $block['content'].= '<div id="types">';
+        $block['content'].= '<div type-id="sector" class="first type active">' . t("Sector") . '</div>';
+        $block['content'].= '<div type-id="cluster" class="type">' . t("Cluster") . '</div>';
+      $block['content'].= '</div><br/>';
+      $block['content'].= '<div id="global-clusters"></div>';
+      break;
+  }
+  return $block;
 }
