@@ -1,0 +1,24 @@
+<!-- Test in local env faster than push..  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
+	
+	<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+	<script src="http://code.highcharts.com/maps/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
+
+	<script src="hr_bundles_map.js"></script>
+</head>
+<body>
+	<div id="clusters-map" class="loading"></div>
+	<div id="types">
+		<div type-id="sector" class="first type active">t("Sector")</div>
+		<div type-id="cluster" class="type">t("Cluster")</div>
+	</div><br/>
+	<div id="global-clusters"></div>
+</body>
+</html>

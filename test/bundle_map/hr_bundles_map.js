@@ -1,7 +1,8 @@
 (function($) {
   $(document).ready(function() {
 
-    var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
+    // var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
+    var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
