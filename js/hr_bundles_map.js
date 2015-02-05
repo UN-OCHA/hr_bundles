@@ -2,6 +2,7 @@
   $(document).ready(function() {
 
     var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
+    // var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
@@ -32,6 +33,41 @@
     aor[5405] = "10";
     aor[5406] = "10";
 
+    /**
+     * @return array of all datas
+     **/
+
+    function getPaginateResults(url, callBack) {
+      $.ajax({ 
+        url: url,
+        async: false
+      }).done(function(firstResult) {
+        var returnResults = firstResult.data;
+        while(firstResult.next) {
+          $.ajax({
+            url: firstResult.next.href,
+            async: false
+          })
+          .done(function(dataPager) {
+            firstResult = dataPager;
+            returnResults = returnResults.concat(dataPager.data);
+          });
+        }
+        return callBack(returnResults);
+      });
+    };
+
+    /**
+     * Set allCountries 
+     **/
+    var allCountries;
+    getPaginateResults( 
+      baseurl+'/api/v1.0/operations?filter[type]=country&fields=self,country',
+      function(res) {
+        allCountries = res;
+      }
+    );
+
     function updateMap() {
 
       var filters = new Array();
@@ -52,6 +88,7 @@
       });
 
       var countriesMap = new Array();
+
       $.each(urls, function(i, url) {
         // Get Data
         $.ajax({
@@ -126,13 +163,13 @@
               result.operation[0].color = '#cd8064';
             }
 
-            // Get country object
-            $.ajax({ 
-              url: result.operation[0].self, 
-              async: false
-            }).done(function(countryData) {
-                result.operation[0].country = countryData.data[0].country;
-              });
+            // add country object
+            $.each(allCountries, function(i, country) {
+              var country = country.country;
+              if(country != null && result.operation[0].label == country.label) {
+                result.operation[0].country = country;
+              }
+            });
 
             countriesMap = countriesMap.concat(result.operation);
           });
@@ -234,3 +271,4 @@
 
   });
 })(jQuery);
+
