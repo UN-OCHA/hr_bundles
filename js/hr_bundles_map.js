@@ -41,7 +41,7 @@
      * map overlay tips
      **/
     
-    $('#clusters-map-overlay').on('click', '#close-overlay, #ok-overlay', // closing events
+    $('#close-overlay, #ok-overlay').click( // closing events
       function() {
         var overlay = $(this).parent();
         overlay.animate({'opacity':0}, 800, function() {
