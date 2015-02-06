@@ -7,13 +7,17 @@
 
 	<link rel="stylesheet" href="http://dev1.humanitarianresponse.info/sites/all/themes/humanitarianresponse/assets/stylesheets/screen.css">
 
+	<link rel="stylesheet" href="../../css/hr_bundles_map.css">
+
 	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
 	
 	<script src="https://code.highcharts.com/maps/highmaps.js"></script>
 	<script src="http://code.highcharts.com/maps/modules/exporting.js"></script>
 	<script src="https://code.highcharts.com/mapdata/custom/world.js"></script>
 
-	<script src="hr_bundles_map.js"></script>
+	<script src="../../js/hr_bundles_map.js"></script>
+
+	
 </head>
 <body>
 	<body class="html not-front not-logged-in no-sidebars page-coordination page-coordination-clusters page-coordination-clusters-countries i18n-en" >
@@ -127,7 +131,8 @@
       
   
   <div class="pane-content">
-    <div id="clusters-map" class="loading"></div><div id="types"><div type-id="sector" class="first type">Sector</div><div type-id="cluster" class="type active">Cluster</div></div><br/><div id="global-clusters"></div>  </div>
+    <div id="clusters-map" class="loading">
+    	<div id="clusters-map-overlay" style="position: absolute;"><p class="tips-clusters-map top-right">Download or link to this map</p><p class="tips-clusters-map lower-left">Display active Clusters, Sectors or both</p><p class="tips-clusters-map middle-bottom">Select the Cluster, Sector or Area-of-Responsibility to be displayed</p></div></div><div id="types"><div type-id="sector" class="first type">Sector</div><div type-id="cluster" class="type active">Cluster</div></div><br/><div id="global-clusters"></div>  </div>
 
   
   </div>

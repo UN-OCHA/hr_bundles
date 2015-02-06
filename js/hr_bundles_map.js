@@ -1,8 +1,8 @@
 (function($) {
   $(document).ready(function() {
 
-    var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
-    // var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
+    // var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
+    var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
@@ -32,6 +32,18 @@
     aor[5404] = "10";
     aor[5405] = "10";
     aor[5406] = "10";
+
+    /**
+     * map overlay tips
+     **/
+    var $mapOverlay = $('#clusters-map-overlay').clone();
+
+    function appendOverlay($overlay) {
+      // test cookie
+
+      // append map
+      $('#clusters-map').append($overlay);
+    }
 
     /**
      * @return array of all datas
@@ -234,6 +246,8 @@
           }
         }]
       });
+
+      appendOverlay($mapOverlay);
     }
 
     //Define click action

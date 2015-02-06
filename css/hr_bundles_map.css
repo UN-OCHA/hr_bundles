@@ -1,3 +1,4 @@
+/* MAP */
 .pane-hr-bundles-clusters-map { background: #FFF; padding: 1px; box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1); }
 .pane-hr-bundles-clusters-map:after { clear: both; display: block; content: ''; }
 .pane-hr-bundles-clusters-map #clusters-map { position: relative; height: 400px; }
@@ -15,3 +16,10 @@
 .pane-hr-bundles-clusters-map #global-clusters .icon img { width: 100%; height: auto; }
 .pane-hr-bundles-clusters-map #global-clusters .sub-icons { margin: 0 3px; display: inline-block; padding: 5px 2px; background-color: #DDD; border-radius: 10px; }
 .pane-hr-bundles-clusters-map #global-clusters .sub-icons .icon { width: 30px; height: 30px; margin: 0 3px; }
+
+/* MAP OVERLAY TIPS */
+#clusters-map-overlay { 
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
+	background-color: blue;
+}
+#clusters-map-overlay p { color: white; }
