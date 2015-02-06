@@ -388,7 +388,7 @@ function hr_bundles_block_view($delta = '') {
           $block['content'] .= '<p class="tips-clusters-map lower-left">'.t("Display active Clusters, Sectors or both").'</p>';
           $block['content'] .= '<p class="tips-clusters-map middle-bottom">'.t("Select the Cluster, Sector or Area-of-Responsibility to be displayed").'</p>';
 
-          $block['content'] .= '<div id="ok-overlay">'.t("OK, I understand").'</p>';
+          $block['content'] .= '<div id="ok-overlay">'.t("OK, I understand").'</div>';
 
         $block['content'] .= '</div>'; // end id="clusters-map-overlay"
       $block['content'] .= '</div>'; // end id="clusters-map"
