@@ -20,6 +20,31 @@
 /* MAP OVERLAY TIPS */
 #clusters-map-overlay { 
 	position: absolute; top: 0; left: 0; right: 0; bottom: 0; 
-	background-color: blue;
+	background-color: #54B1C8; /* old browser */
+	background-color: rgba(84, 177, 200, 0.5);
 }
-#clusters-map-overlay p { color: white; }
+#clusters-map-overlay div,
+#clusters-map-overlay p { 
+	color: white; position: absolute;
+}
+#close-overlay {
+	font-size: 48px; line-height: 1;
+	display: inline-block;
+	padding: 0 8px;
+}
+
+.tips-clusters-map{
+	font-size: 16px;
+}
+.tips-clusters-map.top-right { top: 40px; right: 20px; }
+.tips-clusters-map.lower-left { bottom: 40px; left: 40px; }
+.tips-clusters-map.middle-bottom { width: 120px; bottom: 40px; left: 400px; }
+
+
+#ok-overlay {
+	bottom: 100px; right: 80px; background-color: #54B1C8;
+	display: inline-block; padding: 6px 6px;
+	font-size: 22px; font-weight: bold; 
+}
+
+.cursor-pointer:hover { cursor: pointer; }

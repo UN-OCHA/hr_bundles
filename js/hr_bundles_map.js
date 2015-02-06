@@ -36,7 +36,16 @@
     /**
      * map overlay tips
      **/
-    var $mapOverlay = $('#clusters-map-overlay').clone();
+    
+    $('#clusters-map-overlay').on('click', '#close-overlay, #ok-overlay', // closing events
+      function() {
+        var overlay = $(this).parent();
+        overlay.animate({'opacity':0}, 800, function() {
+          overlay.remove();
+        });
+      });
+
+    var $mapOverlay = $('#clusters-map-overlay').clone(true);
 
     function appendOverlay($overlay) {
       // test cookie
@@ -205,7 +214,7 @@
       $('#clusters-map').highcharts('Map', {
         colors: ['#cd8064'],
         chart : {
-          backgroundColor : '#E0ECED',
+          backgroundColor : '#E0ECED', // bg map
           borderRadius: 0,
           events: {
             load: function() {
