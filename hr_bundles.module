@@ -370,12 +370,25 @@ function hr_bundles_block_view($delta = '') {
 
   switch ($delta) {
     case 'clusters_map':
+      // highcharts api
       drupal_add_js('https://code.highcharts.com/maps/highmaps.js', 'external');
       drupal_add_js('http://code.highcharts.com/maps/modules/exporting.js', 'external');
       drupal_add_js('https://code.highcharts.com/mapdata/custom/world.js', 'external');
+
       drupal_add_js(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
 
-      $block['content']= '<div id="clusters-map" class="loading"></div>';
+      drupal_add_css(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
+
+      $block['content'] = '<div id="clusters-map" class="loading">';
+        $block['content'] .= '<div id="clusters-map-overlay" style="position: absolute;">'; // Map overlay tips
+
+          $block['content'] .= '<p class="tips-clusters-map top-right"     '.t("Download or link to this map").'</p>';
+          $block['content'] .= '<p class="tips-clusters-map lower-left"    '.t("Display active Clusters, Sectors or both").'</p>';
+          $block['content'] .= '<p class="tips-clusters-map middle-bottom" '.t("Select the Cluster, Sector or Area-of-Responsibility to be displayed").'</p>';
+
+        $block['content'] .= '</div>'; // end id="clusters-map-overlay"
+      $block['content'] .= '</div>'; // end id="clusters-map"
+
       $block['content'].= '<div id="types">';
         $block['content'].= '<div type-id="sector" class="first type">' . t("Sector") . '</div>';
         $block['content'].= '<div type-id="cluster" class="type active">' . t("Cluster") . '</div>';
