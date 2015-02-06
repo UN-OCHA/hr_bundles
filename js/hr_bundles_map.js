@@ -1,8 +1,12 @@
 (function($) {
   $(document).ready(function() {
 
-    // var baseurl = window.location.protocol + '//' + window.location.host + '/'; // Server
-    var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
+    var activeProtocol = window.location.protocol;
+
+    if(activeProtocol === "file:") 
+      var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
+    else 
+      var baseurl = activeProtocol + '//' + window.location.host + '/'; // Server
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
