@@ -3,6 +3,7 @@
 
     var activeProtocol = window.location.protocol;
 
+    // @todo remove test when module ready to prod
     if(activeProtocol === "file:") 
       var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
     else 
@@ -52,7 +53,7 @@
     var $mapOverlay = $('#clusters-map-overlay').clone(true);
 
     function appendOverlay($overlay) {
-      // test cookie
+      // @todo test cookie
 
       // append map
       $('#clusters-map').append($overlay);
@@ -295,6 +296,5 @@
       }
       $("#global-clusters .icon:first").trigger("click");
     });
-
   });
 })(jQuery);
