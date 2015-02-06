@@ -377,7 +377,7 @@ function hr_bundles_block_view($delta = '') {
 
       drupal_add_js(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
 
-      drupal_add_css(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
+      drupal_add_css(drupal_get_path('module', 'hr_bundles') . '/css/hr_bundles_map.css', 'file');
 
       $block['content'] = '<div id="clusters-map" class="loading">';
         $block['content'] .= '<div id="clusters-map-overlay" style="position: absolute;">'; // Map overlay tips
