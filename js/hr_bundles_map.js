@@ -160,7 +160,7 @@
 
             //Color
             if(result.type == "cluster") {
-              result.operation[0].color = '#cd8064';
+              result.operation[0].color = '#cc606d';
             }
 
             // add country object
@@ -181,18 +181,17 @@
         if(countriesMap[i].country != null) {
           countriesMap[i].mapCode = countriesMap[i].country.pcode;
         }
-
         //Click on country
         countriesMap[i].events = {
           click: function(e){
-              window.location.href = countriesMap[i].homepage;
+            window.location.href = countriesMap[i].homepage;
           }
         };
       });
 
       // Initiate the chart
       $('#clusters-map').highcharts('Map', {
-        colors: ['#BC2E3B'],
+        colors: ['#cd8064'],
         chart : {
           backgroundColor : '#E0ECED',
           borderRadius: 0,
@@ -229,7 +228,8 @@
           // color: '#FFFF00',
           states: {
             hover: {
-              color: '#DD5763'
+              // color: '#DD5763'
+              color: '#b45a34'
             }
           }
         }]
@@ -271,4 +271,3 @@
 
   });
 })(jQuery);
-
