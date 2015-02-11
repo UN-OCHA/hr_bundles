@@ -394,8 +394,8 @@ function hr_bundles_block_view($delta = '') {
       $block['content'] .= '</div>'; // end id="clusters-map"
 
       $block['content'].= '<div id="types">';
-        $block['content'].= '<div type-id="sector" class="first type active">' . t("Sector") . '</div>';
-        $block['content'].= '<div type-id="cluster" class="type active">' . t("Cluster") . '</div>';
+        $block['content'].= '<div type-id="sector" class="first type">' . t("Sector") . '</div>';
+        $block['content'].= '<div type-id="cluster" class="type">' . t("Cluster") . '</div>';
       $block['content'].= '</div><br/>';
       $block['content'].= '<div id="global-clusters"></div>';
       break;
