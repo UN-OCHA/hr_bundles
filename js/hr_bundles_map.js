@@ -164,21 +164,28 @@
               result.operation[0].partners = "";
             }
             //Activation document
-            if(result.activation_document != null) {
-              result.operation[0].activation_document = "<br/>Activation documents: ";
-              $.each(result.activation_document, function(i, val) {
-                if(i > 0) { result.operation[0].activation_document+= ", "; }
-                result.operation[0].activation_document+= val.label + " ";
-              });
+            if(result.activation_document !== null) {
+              // @Modifs here
+              result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
+              // $.each(result.activation_document, function(i, val) {
+              //   if(i > 0) { result.operation[0].activation_document+= ", "; }
+              //   result.operation[0].activation_document+= val.label + " ";
+              // });
             } else {
               result.operation[0].activation_document = "";
             }
             //Cluster coordinators
             if(result.cluster_coordinators != null) {
+              console.info('result.cluster_coordinators', result.cluster_coordinators);
               result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
+              //@modifs
+              // $.each(result.cluster_coordinators, function(i, val) {
+              //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
+              //   result.operation[0].cluster_coordinators += val.label + " ";
+              // });
               $.each(result.cluster_coordinators, function(i, val) {
-                if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
-                result.operation[0].cluster_coordinators+= val.label + " ";
+                if(i > 0) { result.operation[0].cluster_coordinators+= "- "; }
+                result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
               });
             } else {
               result.operation[0].cluster_coordinators = "";
