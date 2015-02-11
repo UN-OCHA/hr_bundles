@@ -4,9 +4,9 @@
     var activeProtocol = window.location.protocol;
 
     // @todo remove test when module ready to prod
-    if(activeProtocol === "file:") 
+    if(activeProtocol === "file:")
       var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
-    else 
+    else
       var baseurl = activeProtocol + '//' + window.location.host + '/'; // Server
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
@@ -41,7 +41,7 @@
     /**
      * map overlay tips
      **/
-    
+
     $('#close-overlay, #ok-overlay').click( // closing events
       function() {
         var overlay = $(this).parent();
@@ -64,7 +64,7 @@
      **/
 
     function getPaginateResults(url, callBack) {
-      $.ajax({ 
+      $.ajax({
         url: url,
         async: false
       }).done(function(firstResult) {
@@ -84,10 +84,10 @@
     };
 
     /**
-     * Set allCountries 
+     * Set allCountries
      **/
     var allCountries;
-    getPaginateResults( 
+    getPaginateResults(
       baseurl+'/api/v1.0/operations?filter[type]=country&fields=self,country',
       function(res) {
         allCountries = res;
@@ -237,7 +237,7 @@
           map: {
             joinBy: ['iso-a2', 'mapCode'],
             dataLabels: {
-              enabled: true,
+              enabled: false,
               format: '{point.label}'
             },
             mapData: Highcharts.maps['custom/world'],
@@ -260,8 +260,6 @@
           }
         }]
       });
-
-      appendOverlay($mapOverlay);
     }
 
     //Define click action
@@ -294,7 +292,53 @@
         }
         $("#cluster-" + aor[i] + "-aor").append('<div id="cluster-' + i + '" cluster-id="' + i + '" class="icon"><img src="' + iconsurl + iconname[i] + '"/></div>')
       }
-      $("#global-clusters .icon:first").trigger("click");
+      // $("#global-clusters .icon:first").trigger("click");
     });
+
+     $('#clusters-map').highcharts('Map', {
+        colors: ['#cd8064'],
+        chart : {
+          backgroundColor : '#E0ECED', // bg map
+          borderRadius: 0,
+          events: {
+            load: function() {
+              $("#clusters-map").removeClass('loading');
+            }
+          }
+        },
+        title : {
+          text : ''
+        },
+        legend: {
+          enabled: false
+        },
+        plotOptions: {
+          map: {
+            joinBy: ['iso-a2', 'mapCode'],
+            dataLabels: {
+              enabled: false,
+              format: '{point.label}'
+            },
+            mapData: Highcharts.maps['custom/world'],
+            tooltip: {
+              headerFormat: '',
+              pointFormat: '<b>{point.clustername}</b>{point.lead_agencies}{point.partners}{point.activation_document}{point.cluster_coordinators}'
+            }
+
+          }
+        },
+        series : [{
+          data : false,
+          name: ' ',
+          // color: '#FFFF00',
+          states: {
+            hover: {
+              // color: '#DD5763'
+              color: '#b45a34'
+            }
+          }
+        }]
+      });
+      appendOverlay($mapOverlay);
   });
 })(jQuery);
