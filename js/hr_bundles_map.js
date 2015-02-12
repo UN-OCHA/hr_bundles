@@ -176,7 +176,6 @@
             }
             //Cluster coordinators
             if(result.cluster_coordinators != null) {
-              console.info('result.cluster_coordinators', result.cluster_coordinators);
               result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
               //@modifs
               // $.each(result.cluster_coordinators, function(i, val) {
@@ -215,11 +214,11 @@
           countriesMap[i].mapCode = countriesMap[i].country.pcode;
         }
         //Click on country
-        countriesMap[i].events = {
-          click: function(e){
-            window.location.href = countriesMap[i].homepage;
-          }
-        };
+        // countriesMap[i].events = {
+        //   click: function(e){
+        //     window.location.href = countriesMap[i].homepage;
+        //   }
+        // };
       });
 
       // Initiate the chart
@@ -270,7 +269,9 @@
     }
 
     //Define click action
-    $("#global-clusters").on("mousedown", ".icon", function() {
+    var $globalClusters = $("#global-clusters");
+
+    $globalClusters.on("mousedown", ".icon", function() {
       $("#clusters-map").addClass('loading');
     }).on("click", ".icon", function() {
       $(".icon.active").removeClass('active');
@@ -287,9 +288,12 @@
     //Get Icon list
     $.getJSON(baseurl + 'api/v1.0/global_clusters', function(data) {
       var global_clusters = data.data;
+      var definedClusters = {};
       $.each(global_clusters, function(i, global_cluster) { // Render Parent Cluster
         if(typeof aor[global_cluster.id] == "undefined") {
           $("#global-clusters").append('<div id="cluster-' + global_cluster.id + '" cluster-id="' + global_cluster.id + '" class="icon"><img src="' + iconsurl + iconname[global_cluster.id] + '" alt="' + global_cluster.label + '"/></div>');
+        } else {
+          definedClusters[global_cluster.id] = global_cluster;
         }
       });
 
@@ -297,9 +301,22 @@
         if($("#cluster-" + aor[i] + "-aor").length == 0) {
           $("#cluster-" + aor[i]).after('<div id="cluster-' + aor[i] + '-aor" class="sub-icons"></div>');
         }
-        $("#cluster-" + aor[i] + "-aor").append('<div id="cluster-' + i + '" cluster-id="' + i + '" class="icon"><img src="' + iconsurl + iconname[i] + '"/></div>')
+        $("#cluster-" + aor[i] + "-aor").append('<div id="cluster-' + i + '" cluster-id="' + i + '" class="icon"><img src="' + iconsurl + iconname[i] + '" alt="'+ definedClusters[ i ].label +'"/></div>')
       }
       // $("#global-clusters .icon:first").trigger("click");
+    });
+
+    $globalClusters.on('mouseenter', '.icon', function() { // tooltip hover clusters
+      var img = $(this).find('img'),
+      title   = img.attr('alt');
+      var tooltip = [
+        '<div class="cluster-tooltip">',
+          '<p color="red">' + title + '</p>',
+        '</div>'
+      ].join('');
+      img.before(tooltip);
+    }).on('mouseleave', '.icon', function() {
+      $(this).children().first().fadeOut().remove();
     });
 
      $('#clusters-map').highcharts('Map', {
