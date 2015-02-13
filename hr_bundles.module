@@ -312,33 +312,6 @@ function hr_bundles_node_presave($node) {
   }
 }
 
-function hr_bundles_openlayers_map_preprocess_alter($map) {
-  if (isset($map['map_name']) && $map['map_name'] == 'hr_bundles') {
-    drupal_add_js(drupal_get_path('module', 'hr_bundles').'/js/LayerSwitcherRadio.js', array('weight' => 50));
-  }
-}
-
-/**
- * Implements hook_openlayers_behaviors().
- *
- * This is a ctools plugins hook.
- */
-function hr_bundles_openlayers_behaviors() {
-  return array(
-    'hr_bundles_behavior_layerswitcherradio' => array(
-      'title' => t('Layer Switcher Radio'),
-      'description' => t('Provides the ability to switch layers in the map interface through radio buttons only.  This provides an expandable box on the map to enable and disable layers.'),
-      'type' => 'map',
-      'behavior' => array(
-        'path' => drupal_get_path('module', 'hr_bundles') . '/behaviors',
-        'file' => 'hr_bundles_behavior_layerswitcherradio.inc',
-        'class' => 'hr_bundles_behavior_layerswitcherradio',
-        'parent' => 'openlayers_behavior',
-      ),
-    ),
-  );
-}
-
 /**
  * Implements hook_init()
  * Sets cluster context in countries and global pages
