@@ -1,38 +1,45 @@
 (function($) {
-  $(document).ready(function() {
+  $(function() {
 
     var activeProtocol = window.location.protocol;
 
-    // @todo remove test when module ready to prod
-    if (activeProtocol === "file:")
+    // Test base Url
+    if ( activeProtocol === 'file' || window.location.host.indexOf('fiddle') >= 0) {
       var baseurl = 'http://dev1.humanitarianresponse.info/'; // Local
-    else
+    } else {
       var baseurl = activeProtocol + '//' + window.location.host + '/'; // Server
+    }
+
+    /**
+     * [jsFiddleLink set this to good jsFiddle]
+     * @type {String}
+     */
+    var jsFiddleLink = 'http://jsfiddle.net/decuyperjeremie/x7fzrzxj/5/';
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
 
     //Icons data
-    var iconname = new Array();
-    var iconext = ".png";
-    iconname[1] = "CM" + iconext;
-    iconname[2] = "ER" + iconext;
-    iconname[3] = "E" + iconext;
-    iconname[4] = "ES" + iconext;
-    iconname[5] = "ET" + iconext;
-    iconname[6] = "FS" + iconext;
-    iconname[7] = "H" + iconext;
-    iconname[8] = "L" + iconext;
-    iconname[9] = "N" + iconext;
-    iconname[10] = "P" + iconext;
+    var iconname   = new Array();
+    var iconext    = ".png";
+    iconname[1]    = "CM" + iconext;
+    iconname[2]    = "ER" + iconext;
+    iconname[3]    = "E" + iconext;
+    iconname[4]    = "ES" + iconext;
+    iconname[5]    = "ET" + iconext;
+    iconname[6]    = "FS" + iconext;
+    iconname[7]    = "H" + iconext;
+    iconname[8]    = "L" + iconext;
+    iconname[9]    = "N" + iconext;
+    iconname[10]   = "P" + iconext;
     iconname[5403] = "CP" + iconext;
     iconname[5404] = "GBV" + iconext;
     iconname[5405] = "HLP" + iconext;
     iconname[5406] = "MA" + iconext;
-    iconname[11] = "W" + iconext;
+    iconname[11]   = "W" + iconext;
 
     //Aor data (aor[id] = parent)
-    var aor = new Array();
+    var aor   = new Array();
     aor[5403] = "10";
     aor[5404] = "10";
     aor[5405] = "10";
@@ -55,11 +62,17 @@
     var $mapOverlay = $('#clusters-map-overlay').clone(true);
 
     function appendOverlay($overlay) {
-      // @todo test cookie
-
       // append map
       $('#clusters-map').append($overlay);
     }
+
+    // set option btn in burger embed the map
+    Highcharts.getOptions().exporting.buttons.contextButton.menuItems.push({
+        text: 'Embed this map',
+        onclick: function () {
+          window.open(jsFiddleLink,'_blank');
+        }
+    });
 
     /**
      * @return array of all datas
@@ -173,21 +186,12 @@
               if(result.activation_document != null) {
                 // @Modifs here
                 result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
-                // $.each(result.activation_document, function(i, val) {
-                //   if(i > 0) { result.operation[0].activation_document+= ", "; }
-                //   result.operation[0].activation_document+= val.label + " ";
-                // });
               } else {
                 result.operation[0].activation_document = "";
               }
               //Cluster coordinators
               if(result.cluster_coordinators != null) {
                 result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
-                //@modifs
-                // $.each(result.cluster_coordinators, function(i, val) {
-                //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
-                //   result.operation[0].cluster_coordinators += val.label + " ";
-                // });
                 $.each(result.cluster_coordinators, function(i, val) {
                   if(i > 0) { result.operation[0].cluster_coordinators+= "- "; }
                   result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
@@ -224,24 +228,13 @@
 
             //Activation document
             if (result.activation_document !== null) {
-              // @Modifs here
               result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
-              // $.each(result.activation_document, function(i, val) {
-              //   if(i > 0) { result.operation[0].activation_document+= ", "; }
-              //   result.operation[0].activation_document+= val.label + " ";
-              // });
-              
             } else {
               result.operation[0].activation_document = "";
             }
             //Cluster coordinators
             if (result.cluster_coordinators != null) {
               result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
-              //@modifs
-              // $.each(result.cluster_coordinators, function(i, val) {
-              //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
-              //   result.operation[0].cluster_coordinators += val.label + " ";
-              // });
               $.each(result.cluster_coordinators, function(i, val) {
                 if (i > 0) {
                   result.operation[0].cluster_coordinators += "- ";
@@ -277,7 +270,14 @@
         }
       });
 
-      // Initiate the chart
+      initMap(countriesMap);
+    }
+
+    /**
+     * [initMap Initiate the chartmap]
+     * @param  {[obj]} mapData [datas formatted highchat way]
+     */
+    function initMap(mapData) {
       $('#clusters-map').highcharts('Map', {
         colors: ['#cd8064'],
         chart: {
@@ -311,12 +311,10 @@
           }
         },
         series: [{
-          data: countriesMap,
+          data: mapData,
           name: ' ',
-          // color: '#FFFF00',
           states: {
             hover: {
-              // color: '#DD5763'
               color: '#b45a34'
             }
           }
@@ -327,19 +325,21 @@
     //Define click action
     var $globalClusters = $("#global-clusters");
 
-    $globalClusters.on("mousedown", ".icon", function() {
-      $("#clusters-map").addClass('loading');
-    }).on("click", ".icon", function() {
-      $(".icon.active").removeClass('active');
-      $(this).addClass('active');
-      updateMap();
-    });
-    $("#types").on("mousedown", ".type", function() {
-      $("#clusters-map").addClass('loading');
-    }).on("click", ".type", function() {
-      $(this).toggleClass('active');
-      updateMap();
-    });
+    $globalClusters.on("mousedown", ".icon", 
+      function() {
+        $("#clusters-map").addClass('loading');
+      }).on("click", ".icon", function() {
+        $(".icon.active").removeClass('active');
+        $(this).addClass('active');
+        updateMap();
+      });
+    $("#types").on("mousedown", ".type", 
+      function() {
+        $("#clusters-map").addClass('loading');
+      }).on("click", ".type", function() {
+        $(this).toggleClass('active');
+        updateMap();
+      });
 
     //Get Icon list
     $.getJSON(baseurl + 'api/v1.0/global_clusters', function(data) {
@@ -359,7 +359,6 @@
         }
         $("#cluster-" + aor[i] + "-aor").append('<div id="cluster-' + i + '" cluster-id="' + i + '" class="icon"><img src="' + iconsurl + iconname[i] + '" alt="' + definedClusters[i].label + '"/></div>')
       }
-      // $("#global-clusters .icon:first").trigger("click");
     });
 
     $globalClusters.on('mouseenter', '.icon', function() { // tooltip hover clusters
@@ -375,50 +374,7 @@
       $(this).children().first().fadeOut().remove();
     });
 
-    $('#clusters-map').highcharts('Map', {
-      colors: ['#cd8064'],
-      chart: {
-        backgroundColor: '#E0ECED', // bg map
-        borderRadius: 0,
-        events: {
-          load: function() {
-            $("#clusters-map").removeClass('loading');
-          }
-        }
-      },
-      title: {
-        text: ''
-      },
-      legend: {
-        enabled: false
-      },
-      plotOptions: {
-        map: {
-          joinBy: ['iso-a2', 'mapCode'],
-          dataLabels: {
-            enabled: false,
-            format: '{point.label}'
-          },
-          mapData: Highcharts.maps['custom/world'],
-          tooltip: {
-            headerFormat: '',
-            pointFormat: '<b>{point.clustername}</b>{point.lead_agencies}{point.partners}{point.activation_document}{point.cluster_coordinators}'
-          }
-
-        }
-      },
-      series: [{
-        data: false,
-        name: ' ',
-        // color: '#FFFF00',
-        states: {
-          hover: {
-            // color: '#DD5763'
-            color: '#b45a34'
-          }
-        }
-      }]
-    });
+    initMap(false);
     appendOverlay($mapOverlay);
   });
 })(jQuery);
