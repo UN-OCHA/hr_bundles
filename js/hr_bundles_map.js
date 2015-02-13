@@ -86,13 +86,13 @@
     };
 
     /**
-     * Set allCountries
+     * Set allOperations
      **/
-    var allCountries;
+    var allOperations;
     getPaginateResults(
-      baseurl + '/api/v1.0/operations?filter[type]=country&fields=self,country',
+      baseurl + '/api/v1.0/operations?filter[type]=country&fields=self,country,id',
       function(res) {
-        allCountries = res;
+        allOperations = res;
       }
     );
 
@@ -118,8 +118,6 @@
         urls.push(baseurl + "api/v1.0/bundles?filter[type]=aor&" + filters.join("&"));
       }
 
-      // aor[5403]
-
       var countriesMap = new Array();
 
       $.each(urls, function(i, url) {
@@ -144,58 +142,59 @@
             }
 
             $.each(search, function(i, result) {
+
               if (result.operation != null) {
                 result.operation[0].clustername = result.label + " (" + result.operation[0].label + ")";
               } else {
                 return true;
               }
 
-            //Lead agencies
-            if(result.lead_agencies != null) {
-              result.operation[0].lead_agencies = "<br/>Lead agencies: ";
-              $.each(result.lead_agencies, function(i, val) {
-                if(i > 0) { result.operation[0].lead_agencies+= ", "; }
-                result.operation[0].lead_agencies+= val.label + " ";
-              });
-            } else {
-              result.operation[0].lead_agencies = "";
-            }
-            //Co-leads
-            if(result.partners != null) {
-              result.operation[0].partners = "<br/>Co-leads: ";
-              $.each(result.partners, function(i, val) {
-                if(i > 0) { result.operation[0].partners+= ", "; }
-                result.operation[0].partners+= val.label + " ";
-              });
-            } else {
-              result.operation[0].partners = "";
-            }
-            //Activation document
-            if(result.activation_document != null) {
-              // @Modifs here
-              result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
-              // $.each(result.activation_document, function(i, val) {
-              //   if(i > 0) { result.operation[0].activation_document+= ", "; }
-              //   result.operation[0].activation_document+= val.label + " ";
-              // });
-            } else {
-              result.operation[0].activation_document = "";
-            }
-            //Cluster coordinators
-            if(result.cluster_coordinators != null) {
-              result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
-              //@modifs
-              // $.each(result.cluster_coordinators, function(i, val) {
-              //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
-              //   result.operation[0].cluster_coordinators += val.label + " ";
-              // });
-              $.each(result.cluster_coordinators, function(i, val) {
-                if(i > 0) { result.operation[0].cluster_coordinators+= "- "; }
-                result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
-              });
-            } else {
-              result.operation[0].cluster_coordinators = "";
-            }
+              //Lead agencies
+              if(result.lead_agencies != null) {
+                result.operation[0].lead_agencies = "<br/>Lead agencies: ";
+                $.each(result.lead_agencies, function(i, val) {
+                  if(i > 0) { result.operation[0].lead_agencies+= ", "; }
+                  result.operation[0].lead_agencies+= val.label + " ";
+                });
+              } else {
+                result.operation[0].lead_agencies = "";
+              }
+              //Co-leads
+              if(result.partners != null) {
+                result.operation[0].partners = "<br/>Co-leads: ";
+                $.each(result.partners, function(i, val) {
+                  if(i > 0) { result.operation[0].partners+= ", "; }
+                  result.operation[0].partners+= val.label + " ";
+                });
+              } else {
+                result.operation[0].partners = "";
+              }
+              //Activation document
+              if(result.activation_document != null) {
+                // @Modifs here
+                result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
+                // $.each(result.activation_document, function(i, val) {
+                //   if(i > 0) { result.operation[0].activation_document+= ", "; }
+                //   result.operation[0].activation_document+= val.label + " ";
+                // });
+              } else {
+                result.operation[0].activation_document = "";
+              }
+              //Cluster coordinators
+              if(result.cluster_coordinators != null) {
+                result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
+                //@modifs
+                // $.each(result.cluster_coordinators, function(i, val) {
+                //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
+                //   result.operation[0].cluster_coordinators += val.label + " ";
+                // });
+                $.each(result.cluster_coordinators, function(i, val) {
+                  if(i > 0) { result.operation[0].cluster_coordinators+= "- "; }
+                  result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
+                });
+              } else {
+                result.operation[0].cluster_coordinators = "";
+              }
 
               //Lead agencies
               if (result.lead_agencies != null) {
@@ -209,6 +208,7 @@
               } else {
                 result.operation[0].lead_agencies = "";
               }
+
               //Co-leads
               if (result.partners != null) {
                 result.operation[0].partners = "<br/>Co-leads: ";
@@ -222,57 +222,52 @@
                 result.operation[0].partners = "";
               }
 
-              //Activation document
-              if (result.activation_document !== null) {
-                // @Modifs here
-                result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
-                // $.each(result.activation_document, function(i, val) {
-                //   if(i > 0) { result.operation[0].activation_document+= ", "; }
-                //   result.operation[0].activation_document+= val.label + " ";
-                // });
-                
-              } else {
-                result.operation[0].activation_document = "";
-              }
-              //Cluster coordinators
-              if (result.cluster_coordinators != null) {
-                result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
-                //@modifs
-                // $.each(result.cluster_coordinators, function(i, val) {
-                //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
-                //   result.operation[0].cluster_coordinators += val.label + " ";
-                // });
-                $.each(result.cluster_coordinators, function(i, val) {
-                  if (i > 0) {
-                    result.operation[0].cluster_coordinators += "- ";
-                  }
-                  result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
-                });
-              } else {
-                result.operation[0].cluster_coordinators = "";
-              }
-
-              //Color
-              if (result.type == "cluster") {
-                result.operation[0].color = '#cc606d';
-              }
-
-              // add country object
-              $.each(allCountries, function(i, country) {
-                var country = country.country;
-                if (country != null && result.operation[0].label == 'Democratic Republic of the Congo' && country.label == 'Congo, The Democratic Republic of the') {
-                  console.info('result.operation[0]', result.operation[0]);
-                  console.info('country', country);
+            //Activation document
+            if (result.activation_document !== null) {
+              // @Modifs here
+              result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
+              // $.each(result.activation_document, function(i, val) {
+              //   if(i > 0) { result.operation[0].activation_document+= ", "; }
+              //   result.operation[0].activation_document+= val.label + " ";
+              // });
+              
+            } else {
+              result.operation[0].activation_document = "";
+            }
+            //Cluster coordinators
+            if (result.cluster_coordinators != null) {
+              result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
+              //@modifs
+              // $.each(result.cluster_coordinators, function(i, val) {
+              //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
+              //   result.operation[0].cluster_coordinators += val.label + " ";
+              // });
+              $.each(result.cluster_coordinators, function(i, val) {
+                if (i > 0) {
+                  result.operation[0].cluster_coordinators += "- ";
                 }
-
-                if (country != null && result.operation[0].label == country.label) {
-                  result.operation[0].country = country;
-                }
+                result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
               });
+            } else {
+              result.operation[0].cluster_coordinators = "";
+            }
 
-              countriesMap = countriesMap.concat(result.operation);
+            //Color
+            if (result.type == "cluster") {
+              result.operation[0].color = '#cc606d';
+            }
+            
+            // add country object
+            $.each(allOperations, function(i, data) {
+              var country = data.country;
+              if (country != null && result.operation[0].id == data.id) {
+                result.operation[0].country = country;
+              }
             });
+
+            countriesMap = countriesMap.concat(result.operation);
           });
+        });
       });
 
       $(countriesMap).each(function(i) {
@@ -280,12 +275,6 @@
         if (countriesMap[i].country != null) {
           countriesMap[i].mapCode = countriesMap[i].country.pcode;
         }
-        //Click on country
-        // countriesMap[i].events = {
-        //   click: function(e){
-        //     window.location.href = countriesMap[i].homepage;
-        //   }
-        // };
       });
 
       // Initiate the chart
