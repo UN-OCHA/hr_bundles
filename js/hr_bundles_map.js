@@ -164,7 +164,7 @@
               result.operation[0].partners = "";
             }
             //Activation document
-            if(result.activation_document !== null) {
+            if(result.activation_document != null) {
               // @Modifs here
               result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
               // $.each(result.activation_document, function(i, val) {
