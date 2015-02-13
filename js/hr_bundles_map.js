@@ -103,7 +103,6 @@
         filters.push("filter[global_cluster]=" + $("#global-clusters .icon.active").attr('cluster-id'));
       }
 
-
       if ($("#types .type.active").length == 0) {
         var activeTypes = $("#types .type");
       } else {
@@ -214,6 +213,11 @@
               // add country object
               $.each(allCountries, function(i, country) {
                 var country = country.country;
+                if (country != null && result.operation[0].label == 'Democratic Republic of the Congo' && country.label == 'Congo, The Democratic Republic of the') {
+                  console.info('result.operation[0]', result.operation[0]);
+                  console.info('country', country);
+                }
+
                 if (country != null && result.operation[0].label == country.label) {
                   result.operation[0].country = country;
                 }
