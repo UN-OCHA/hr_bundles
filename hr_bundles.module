@@ -372,7 +372,7 @@ function hr_bundles_block_view($delta = '') {
     case 'clusters_map':
       // highcharts api
       drupal_add_js('https://code.highcharts.com/maps/highmaps.js', 'external');
-      drupal_add_js('http://code.highcharts.com/maps/modules/exporting.js', 'external');
+      drupal_add_js('https://code.highcharts.com/maps/modules/exporting.js', 'external');
       drupal_add_js('https://code.highcharts.com/mapdata/custom/world.js', 'external');
 
       drupal_add_js(drupal_get_path('module', 'hr_bundles') . '/js/hr_bundles_map.js', 'file');
