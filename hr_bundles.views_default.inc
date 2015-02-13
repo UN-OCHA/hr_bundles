@@ -64,12 +64,14 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['og_group_ref']['table'] = 'og_membership';
   $handler->display->display_options['fields']['og_group_ref']['field'] = 'og_group_ref';
   $handler->display->display_options['fields']['og_group_ref']['label'] = '';
+  $handler->display->display_options['fields']['og_group_ref']['alter']['make_link'] = TRUE;
   $handler->display->display_options['fields']['og_group_ref']['alter']['path'] = '[field_website]';
   $handler->display->display_options['fields']['og_group_ref']['alter']['absolute'] = TRUE;
   $handler->display->display_options['fields']['og_group_ref']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['og_group_ref']['settings'] = array(
     'link' => 0,
   );
+  $handler->display->display_options['fields']['og_group_ref']['delta_offset'] = '0';
   /* Field: Content: Global Cluster */
   $handler->display->display_options['fields']['field_sector']['id'] = 'field_sector';
   $handler->display->display_options['fields']['field_sector']['table'] = 'field_data_field_sector';
@@ -110,22 +112,6 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['filters']['field_bundle_type_value']['value'] = array(
     'cluster' => 'cluster',
   );
-
-  /* Display: Map */
-  $handler = $view->new_display('panel_pane', 'Map', 'map');
-  $handler->display->display_options['defaults']['style_plugin'] = FALSE;
-  $handler->display->display_options['style_plugin'] = 'openlayers_map';
-  $handler->display->display_options['style_options']['map'] = 'hr_bundles';
-  $handler->display->display_options['defaults']['style_options'] = FALSE;
-  $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['defaults']['row_options'] = FALSE;
-  $handler->display->display_options['defaults']['footer'] = FALSE;
-  /* Footer: Global: Text area */
-  $handler->display->display_options['footer']['area']['id'] = 'area';
-  $handler->display->display_options['footer']['area']['table'] = 'views';
-  $handler->display->display_options['footer']['area']['field'] = 'area';
-  $handler->display->display_options['footer']['area']['content'] = '<div id="hr-bundles-layer-switcher"></div>';
-  $handler->display->display_options['footer']['area']['format'] = 'panopoly_html_text';
 
   /* Display: GeoJSON */
   $handler = $view->new_display('page', 'GeoJSON', 'geojson');
@@ -588,9 +574,6 @@ Co-leads: [field_partners]';
     t('Desc'),
     t('Group node from OG membership'),
     t('[path]'),
-    t('Map'),
-    t('<div id="hr-bundles-layer-switcher"></div>'),
-    t('View panes'),
     t('GeoJSON'),
     t('Taxonomy term entity referenced from field_country'),
     t('Content entity referenced from field_sector'),
@@ -606,6 +589,7 @@ Co-leads: [field_partners]'),
     t('All'),
     t('GeoJSON Sectors'),
     t('Text'),
+    t('View panes'),
     t('Entity Reference'),
     t('[title] ([og_group_ref])'),
   );

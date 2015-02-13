@@ -150,6 +150,53 @@
                 return true;
               }
 
+            //Lead agencies
+            if(result.lead_agencies != null) {
+              result.operation[0].lead_agencies = "<br/>Lead agencies: ";
+              $.each(result.lead_agencies, function(i, val) {
+                if(i > 0) { result.operation[0].lead_agencies+= ", "; }
+                result.operation[0].lead_agencies+= val.label + " ";
+              });
+            } else {
+              result.operation[0].lead_agencies = "";
+            }
+            //Co-leads
+            if(result.partners != null) {
+              result.operation[0].partners = "<br/>Co-leads: ";
+              $.each(result.partners, function(i, val) {
+                if(i > 0) { result.operation[0].partners+= ", "; }
+                result.operation[0].partners+= val.label + " ";
+              });
+            } else {
+              result.operation[0].partners = "";
+            }
+            //Activation document
+            if(result.activation_document != null) {
+              // @Modifs here
+              result.operation[0].activation_document = "<br/>Activation documents: " + result.activation_document.label;
+              // $.each(result.activation_document, function(i, val) {
+              //   if(i > 0) { result.operation[0].activation_document+= ", "; }
+              //   result.operation[0].activation_document+= val.label + " ";
+              // });
+            } else {
+              result.operation[0].activation_document = "";
+            }
+            //Cluster coordinators
+            if(result.cluster_coordinators != null) {
+              result.operation[0].cluster_coordinators = "<br/>Cluster coordinators: ";
+              //@modifs
+              // $.each(result.cluster_coordinators, function(i, val) {
+              //   if(i > 0) { result.operation[0].cluster_coordinators+= ", "; }
+              //   result.operation[0].cluster_coordinators += val.label + " ";
+              // });
+              $.each(result.cluster_coordinators, function(i, val) {
+                if(i > 0) { result.operation[0].cluster_coordinators+= "- "; }
+                result.operation[0].cluster_coordinators += val.name + " (" + val.email + ") ";
+              });
+            } else {
+              result.operation[0].cluster_coordinators = "";
+            }
+
               //Lead agencies
               if (result.lead_agencies != null) {
                 result.operation[0].lead_agencies = "<br/>Lead agencies: ";
