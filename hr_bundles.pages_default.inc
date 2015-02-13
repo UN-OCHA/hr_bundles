@@ -48,32 +48,39 @@ function hr_bundles_default_page_manager_pages() {
   $display = new panels_display();
   $display->layout = 'radix_boxton';
   $display->layout_settings = array();
-  $display->panel_settings = array();
+  $display->panel_settings = array(
+    'style_settings' => array(
+      'default' => NULL,
+      'contentmain' => NULL,
+    ),
+  );
   $display->cache = array();
   $display->title = '';
   $display->uuid = 'c31246ce-dda4-4124-8f74-d7f5c5018768';
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-067570d0-a210-4094-94fb-64762fb63b74';
+    $pane->pid = 'new-bbd0b967-fb8f-4418-8bb4-552a61978a16';
     $pane->panel = 'contentmain';
-    $pane->type = 'views_panes';
-    $pane->subtype = 'hr_bundles-map';
+    $pane->type = 'block';
+    $pane->subtype = 'hr_bundles-clusters_map';
     $pane->shown = TRUE;
     $pane->access = array();
-    $pane->configuration = array();
+    $pane->configuration = array(
+      'override_title' => 0,
+      'override_title_text' => '',
+    );
     $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
-      'style' => 'hr_highlighted',
     );
     $pane->css = array();
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = '067570d0-a210-4094-94fb-64762fb63b74';
-    $display->content['new-067570d0-a210-4094-94fb-64762fb63b74'] = $pane;
-    $display->panels['contentmain'][0] = 'new-067570d0-a210-4094-94fb-64762fb63b74';
+    $pane->uuid = 'bbd0b967-fb8f-4418-8bb4-552a61978a16';
+    $display->content['new-bbd0b967-fb8f-4418-8bb4-552a61978a16'] = $pane;
+    $display->panels['contentmain'][0] = 'new-bbd0b967-fb8f-4418-8bb4-552a61978a16';
     $pane = new stdClass();
     $pane->pid = 'new-df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd';
     $pane->panel = 'contentmain';
@@ -94,7 +101,7 @@ function hr_bundles_default_page_manager_pages() {
     $display->content['new-df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd'] = $pane;
     $display->panels['contentmain'][1] = 'new-df1bea6a-8f02-4ad4-b0a0-a0c7f202c0bd';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-067570d0-a210-4094-94fb-64762fb63b74';
+  $display->title_pane = '0';
   $handler->conf['display'] = $display;
   $page->default_handlers[$handler->name] = $handler;
   $pages['hr_bundles'] = $page;
