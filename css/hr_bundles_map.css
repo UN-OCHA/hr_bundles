@@ -14,8 +14,8 @@
 .pane-hr-bundles-clusters-map #types .type.active:before { content: "\f046"; }
 .pane-hr-bundles-clusters-map #global-clusters { margin-right: 7px; margin-top: -9px; margin-bottom: 10px; float: right; line-height: 0; }
 .pane-hr-bundles-clusters-map #global-clusters .icon { width: 40px; height: 40px; display: inline-block; color: white; font-size: 0.7em; margin: 1px; cursor: pointer; line-height: 0; margin: 0 3px; position: relative; }
-.pane-hr-bundles-clusters-map #global-clusters .icon.active { opacity: 1; }
 .pane-hr-bundles-clusters-map #global-clusters .icon img { width: 100%; height: auto; opacity: 0.3; }
+.pane-hr-bundles-clusters-map #global-clusters .icon.active img { opacity: 1; }
 .pane-hr-bundles-clusters-map #global-clusters .sub-icons { margin: 0 3px; display: inline-block; padding: 5px 2px; background-color: #DDD; border-radius: 10px; }
 .pane-hr-bundles-clusters-map #global-clusters .sub-icons .icon { width: 30px; height: 30px; margin: 0 3px; }
 
@@ -80,16 +80,16 @@
 .cluster-tooltip {
 	display: inline-block;
 	background-color: #54B1C8;
-	position: absolute; top: -82px; left: -50%;
+	position: absolute; top: -82px; left: -50%; margin-left: -114px;
 	padding: 0 6px;
-	min-width: 300px; height: 60px;
+	width: 300px; height: 60px;
 	text-align: center;
 	font-size: 16px; line-height: 60px; font-weight: 600;
-	margin-left: -114px;
+	border-radius: 6px;
 }
 .cluster-tooltip p {
 	font-family: 'Exo 2', sans-serif;
-	font-style: 16px; color: white;
+	font-style: 16px; color: white; 
 }
 .cluster-tooltip:after { /* down arrow */
 	width: 0; height: 0; display: block; content: '';
