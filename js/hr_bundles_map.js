@@ -14,7 +14,7 @@
      * [jsFiddleLink set this to good jsFiddle]
      * @type {String}
      */
-    var jsFiddleLink = 'http://jsfiddle.net/decuyperjeremie/x7fzrzxj/5/';
+    var jsFiddleLink = 'http://jsfiddle.net/guillaumev/32ouwf76/';
 
     var themeurl = baseurl + 'sites/all/themes/humanitarianresponse/';
     var iconsurl = themeurl + 'assets/images/icons/75/Clusters/';
