@@ -246,7 +246,7 @@
             }
 
             //Color
-            if (result.type == "cluster") {
+            if (result.type == "cluster" || result.type == "aor") {
               result.operation[0].color = '#cc606d';
             }
             
