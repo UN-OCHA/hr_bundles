@@ -80,6 +80,13 @@ function hr_bundles_og_context_negotiation_info() {
     'callback' => 'hr_bundles_og_context_handler',
     'menu path' => array('node/%', 'group/%/%/admin'),
   );
+
+  $providers['hr_bundles_node'] = array(
+    'name' => t('HR Bundle Node'),
+    'description' => t('Sets bundle context on node'),
+    'callback' => 'hr_bundles_node_og_context_handler',
+    'menu path' => array('node/%'),
+  );
   return $providers;
 }
 
@@ -103,6 +110,27 @@ function hr_bundles_og_context_handler($node = NULL) {
       if (!empty($op_gid)) {
         $context['node'][0] = $op_gid;
       }
+    }
+  }
+  return $context;
+}
+
+function hr_bundles_node_og_context_handler($node = NULL) {
+  $context = og_context_handler_node($node);
+  if (empty($node)) {
+    $node = menu_get_object();
+  }
+  if (!empty($node) && isset($node->field_bundles)) {
+    // If there is one single bundle, set the context of the bundle
+    $nb_bundles = count($node->field_bundles[LANGUAGE_NONE]);
+    if ($nb_bundles == 1) {
+      $nid = $node->field_bundles[LANGUAGE_NONE][0]['target_id'];
+      $context['node'] = array($nid);
+    }
+    // Otherwise set the context of the operation
+    elseif ($nb_bundles > 1) {
+      $nid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+      $context['node'] = array($nid);
     }
   }
   return $context;
@@ -396,4 +424,34 @@ function hr_bundles_block_view($delta = '') {
       break;
   }
   return $block;
+}
+
+/**
+ * Implements hook_facetapi_facet_info_alter
+ *
+ * Change the map callback function to display bundles labels with operations
+ * See http://atrium.humanitarianresponse.info/humanitarian_response/node/4313
+ */
+function hr_bundles_facetapi_facet_info_alter(array &$facet_info, array $searcher_info) {
+  if (isset($facet_info['field_bundles'])) {
+    $facet_info['field_bundles']['map callback'] = 'hr_bundles_facet_bundles_map_callback';
+  }
+}
+
+function hr_bundles_facet_bundles_map_callback(array $values, array $options = array()) {
+  $map = array();
+  $operations = array();
+  $entities = entity_load('node', $values);
+  foreach ($values as $value) {
+    $entity = $entities[$value];
+    $field = $entity->{OG_AUDIENCE_FIELD};
+    $gid = $field[LANGUAGE_NONE][0]['target_id'];
+    if (!isset($operations[$gid])) {
+      $op = entity_load_single('node', $gid);
+      $operations[$gid] = entity_label('node', $op);
+    } 
+
+    $map[$value] = entity_label('node', $entities[$value]).' ('.$operations[$gid].')';
+  }
+  return $map;
 }
