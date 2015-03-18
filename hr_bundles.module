@@ -455,3 +455,48 @@ function hr_bundles_facet_bundles_map_callback(array $values, array $options = a
   }
   return $map;
 }
+
+/**
+ * Implements hook_variable_update($name, $value, $old_value, $options)
+ *
+ * When changing a variable in an operation, update the variables in all bundles
+ */
+function hr_bundles_variable_update($name, $value, $old_value, $options) {
+  // If updating an OG variable
+  if (isset($options['realm']) && $options['realm'] == 'og') {
+    // Load the node for which we are updating variables
+    $gid = str_replace('node_', '', $options['key']);
+    $group = node_load($gid);
+    if ($group->type == 'hr_operation') {
+      // Update the variable in all bundles
+      $bundles = _hr_bundles_get_bundles($gid);
+      $ids = array_keys($bundles);
+      foreach ($ids as $id) {
+        variable_realm_set('og', 'node_'.$id, $name, $value);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_node_insert()
+ *
+ * Sets the og variables of the operation when creating a bundle
+ */
+function hr_bundles_node_insert($node) {
+  if ($node->type == 'hr_bundle') {
+    // Get nid of the operation
+    $op_gid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+    // Get enabled variables
+    $controller = variable_realm_controller('og');
+    $enabled_variables = $controller->getEnabledVariables();
+    foreach ($enabled_variables as $name) {
+      $value = variable_realm_get('og', 'node_'.$op_gid, $name);
+      if ($value != NULL) {
+        variable_realm_set('og', 'node_'.$node->nid, $name, $value);
+      }
+    }
+  }
+  // TODO: make all managers and editors of the operation a bundle member of this bundle
+  // See http://atrium.humanitarianresponse.info/humanitarian_response/node/4143
+}
