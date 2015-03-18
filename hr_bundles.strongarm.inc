@@ -165,18 +165,18 @@ function hr_bundles_strongarm() {
   $strongarm->value = array(
     'acc_applications' => '0',
     'acc_incidents' => '0',
-    'hr_assessments' => '1',
-    'hr_contacts' => '1',
+    'hr_assessments' => '2',
+    'hr_contacts' => '2',
     'hr_datasets' => '0',
     'hr_disasters' => '0',
-    'hr_documents' => '1',
-    'hr_events' => '1',
-    'hr_infographics' => '1',
-    'hr_news' => '1',
+    'hr_documents' => '2',
+    'hr_events' => '2',
+    'hr_infographics' => '2',
+    'hr_news' => '2',
     'hr_offices' => '0',
     'hr_pages' => '1',
-    'hr_users' => '0',
-    'hr_webforms' => '0',
+    'hr_users' => '3',
+    'hr_webforms' => '3',
   );
   $export['og_features_settings_node_hr_bundle'] = $strongarm;
 
