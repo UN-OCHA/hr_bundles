@@ -52,22 +52,18 @@ function hr_bundles_panelizer_defaults() {
   $display->content = array();
   $display->panels = array();
     $pane = new stdClass();
-    $pane->pid = 'new-bc1024cb-7fac-4ebf-bca8-49f903cc0e53';
+    $pane->pid = 'new-6877c6ce-c2f1-4982-bc24-066fb66750f1';
     $pane->panel = 'column1';
-    $pane->type = 'fieldable_panels_pane';
-    $pane->subtype = 'fpid:1446';
+    $pane->type = 'hr_documents_key_documents';
+    $pane->subtype = 'hr_documents_key_documents';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'view_mode' => 'teaser',
+      'documents' => FALSE,
+      'override_title' => 1,
+      'override_title_text' => 'Key Documents',
     );
-    $pane->cache = array(
-      'method' => 'simple',
-      'settings' => array(
-        'lifetime' => '604800',
-        'granularity' => 'none',
-      ),
-    );
+    $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
       'style' => 'hr_highlighted',
@@ -76,26 +72,24 @@ function hr_bundles_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $pane->uuid = 'bc1024cb-7fac-4ebf-bca8-49f903cc0e53';
-    $display->content['new-bc1024cb-7fac-4ebf-bca8-49f903cc0e53'] = $pane;
-    $display->panels['column1'][0] = 'new-bc1024cb-7fac-4ebf-bca8-49f903cc0e53';
+    $pane->uuid = '6877c6ce-c2f1-4982-bc24-066fb66750f1';
+    $display->content['new-6877c6ce-c2f1-4982-bc24-066fb66750f1'] = $pane;
+    $display->panels['column1'][0] = 'new-6877c6ce-c2f1-4982-bc24-066fb66750f1';
     $pane = new stdClass();
-    $pane->pid = 'new-d421b89b-9be1-49c0-91e2-20bad8d67382';
+    $pane->pid = 'new-95e3e805-0870-4575-b617-cec3ea15411d';
     $pane->panel = 'column1';
-    $pane->type = 'fieldable_panels_pane';
-    $pane->subtype = 'fpid:1447';
+    $pane->type = 'hr_infographics_key_infographics';
+    $pane->subtype = 'hr_infographics_key_infographics';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'view_mode' => 'teaser',
-    );
-    $pane->cache = array(
-      'method' => 'simple',
-      'settings' => array(
-        'lifetime' => '604800',
-        'granularity' => 'none',
+      'infographics' => array(
+        0 => FALSE,
       ),
+      'override_title' => 1,
+      'override_title_text' => 'Key Infographics',
     );
+    $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
       'style' => 'hr_highlighted',
@@ -104,26 +98,24 @@ function hr_bundles_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $pane->uuid = 'd421b89b-9be1-49c0-91e2-20bad8d67382';
-    $display->content['new-d421b89b-9be1-49c0-91e2-20bad8d67382'] = $pane;
-    $display->panels['column1'][1] = 'new-d421b89b-9be1-49c0-91e2-20bad8d67382';
+    $pane->uuid = '95e3e805-0870-4575-b617-cec3ea15411d';
+    $display->content['new-95e3e805-0870-4575-b617-cec3ea15411d'] = $pane;
+    $display->panels['column1'][1] = 'new-95e3e805-0870-4575-b617-cec3ea15411d';
     $pane = new stdClass();
-    $pane->pid = 'new-053d6b48-bd14-4314-96ac-3d724c323619';
+    $pane->pid = 'new-78681d00-c9d4-4bc8-8693-9c6dbd083be4';
     $pane->panel = 'column1';
-    $pane->type = 'fieldable_panels_pane';
-    $pane->subtype = 'fpid:1448';
+    $pane->type = 'hr_contacts_key_contacts';
+    $pane->subtype = 'hr_contacts_key_contacts';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'view_mode' => 'teaser',
-    );
-    $pane->cache = array(
-      'method' => 'simple',
-      'settings' => array(
-        'lifetime' => '604800',
-        'granularity' => 'none',
+      'contacts' => array(
+        0 => FALSE,
       ),
+      'override_title' => 1,
+      'override_title_text' => 'Key Contacts',
     );
+    $pane->cache = array();
     $pane->style = array(
       'settings' => NULL,
       'style' => 'hr_highlighted',
@@ -132,9 +124,9 @@ function hr_bundles_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $pane->uuid = '053d6b48-bd14-4314-96ac-3d724c323619';
-    $display->content['new-053d6b48-bd14-4314-96ac-3d724c323619'] = $pane;
-    $display->panels['column1'][2] = 'new-053d6b48-bd14-4314-96ac-3d724c323619';
+    $pane->uuid = '78681d00-c9d4-4bc8-8693-9c6dbd083be4';
+    $display->content['new-78681d00-c9d4-4bc8-8693-9c6dbd083be4'] = $pane;
+    $display->panels['column1'][2] = 'new-78681d00-c9d4-4bc8-8693-9c6dbd083be4';
     $pane = new stdClass();
     $pane->pid = 'new-b6ec1f94-7313-4b3a-ba67-c5b2145a3674';
     $pane->panel = 'column1';

@@ -197,7 +197,7 @@ function hr_bundles_field_default_field_instances() {
         'summary_rows' => 5,
       ),
       'type' => 'text_textarea_with_summary',
-      'weight' => 16,
+      'weight' => 17,
     ),
   );
 
@@ -254,6 +254,55 @@ function hr_bundles_field_default_field_instances() {
       ),
       'type' => 'entityreference_autocomplete',
       'weight' => 10,
+    ),
+  );
+
+  // Exported field_instance: 'node-hr_bundle-field_bundle_hid_access'
+  $field_instances['node-hr_bundle-field_bundle_hid_access'] = array(
+    'bundle' => 'hr_bundle',
+    'default_value' => array(
+      0 => array(
+        'value' => 'open',
+      ),
+    ),
+    'deleted' => 0,
+    'description' => 'Select "Open" if you want HID users to add themselves to this cluster/sector.
+Select "Closed" if you want only HID managers to be allowed to add HID users to this cluster/sector.',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 23,
+      ),
+      'search_result' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_bundle_hid_access',
+    'label' => 'HID Access',
+    'required' => 1,
+    'settings' => array(
+      'entity_translation_sync' => FALSE,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 14,
     ),
   );
 
@@ -395,7 +444,7 @@ function hr_bundles_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'email_textfield',
-      'weight' => 18,
+      'weight' => 19,
     ),
   );
 
@@ -534,7 +583,7 @@ function hr_bundles_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 20,
+      'weight' => 21,
     ),
   );
 
@@ -580,7 +629,7 @@ function hr_bundles_field_default_field_instances() {
         'apply_chosen' => 1,
       ),
       'type' => 'options_select',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -693,7 +742,6 @@ function hr_bundles_field_default_field_instances() {
   $field_instances['node-hr_bundle-field_parent_cluster'] = array(
     'bundle' => 'hr_bundle',
     'default_value' => NULL,
-    'default_value_function' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -724,11 +772,6 @@ function hr_bundles_field_default_field_instances() {
     'label' => 'Parent cluster',
     'required' => 0,
     'settings' => array(
-      'behaviors' => array(
-        'prepopulate' => array(
-          'status' => 0,
-        ),
-      ),
       'entity_translation_sync' => FALSE,
       'user_register_form' => FALSE,
     ),
@@ -915,7 +958,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 19,
+      'weight' => 20,
     ),
   );
 
@@ -976,7 +1019,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'link',
       'settings' => array(),
       'type' => 'link_field',
-      'weight' => 17,
+      'weight' => 18,
     ),
   );
 
@@ -1033,7 +1076,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 14,
+      'weight' => 15,
     ),
     'widget_type' => 'options_select',
   );
@@ -1171,7 +1214,7 @@ function hr_bundles_field_default_field_instances() {
       'module' => 'og',
       'settings' => array(),
       'type' => 'og_complex',
-      'weight' => 15,
+      'weight' => 16,
     ),
   );
 
@@ -1239,6 +1282,7 @@ function hr_bundles_field_default_field_instances() {
   t('Group');
   t('Group visibility');
   t('Groups audience');
+  t('HID Access');
   t('Inter-cluster');
   t('Lead Agencies');
   t('Mailchimp API key');
@@ -1246,6 +1290,8 @@ function hr_bundles_field_default_field_instances() {
   t('NGO Participation');
   t('Parent cluster');
   t('Partners');
+  t('Select "Open" if you want HID users to add themselves to this cluster/sector.
+Select "Closed" if you want only HID managers to be allowed to add HID users to this cluster/sector.');
   t('Social media');
   t('Title');
   t('Type');
