@@ -30,6 +30,7 @@ function hr_bundles_drush_command() {
 }
 
 function drush_hr_bundles_as_spaces() {
+  ini_set('memory_limit', '2G');
   // Load all bundles
   $query = new EntityFieldQuery();
   $bundles = $query

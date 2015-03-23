@@ -353,16 +353,6 @@ function hr_bundles_form_og_ui_delete_membership_alter(&$form, &$form_state) {
 }
 
 /**
- * Implements hook_node_presave()
- * Do not create og_menu for bundles
- */
-/*function hr_bundles_node_presave($node) {
-  if ($node->type == 'hr_bundle') {
-    $node->og_menu = FALSE;
-  }
-}*/
-
-/**
  * Implements hook_init()
  * Sets cluster context in countries and global pages
  */
