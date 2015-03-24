@@ -237,7 +237,7 @@ function hr_bundles_node_access($node, $op, $account) {
  * Change access callback for node revisions
  */
 function hr_bundles_menu_alter(&$items) {
-  $items['node/%node/revisions']['access callback'] = 'hr_bundles_node_revision_access';
+  /*$items['node/%node/revisions']['access callback'] = 'hr_bundles_node_revision_access';
   $items['node/%node/revisions']['access arguments'] = array(1);
 
   $items['node/%node/revisions/%/view']['access callback'] = 'hr_bundles_node_revision_access';
@@ -249,7 +249,7 @@ function hr_bundles_menu_alter(&$items) {
   $items['node/%node/revisions/%/delete']['access arguments'] = array(1, 4);
   if (module_exists('diff')) {
     $items['node/%node/revisions/view']['access callback'] = 'hr_bundles_node_revision_access';
-  }
+  }*/
 
 }
 
