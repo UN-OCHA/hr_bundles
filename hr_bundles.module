@@ -120,7 +120,7 @@ function hr_bundles_node_og_context_handler($node = NULL) {
   if (empty($node)) {
     $node = menu_get_object();
   }
-  if (!empty($node) && isset($node->field_bundles)) {
+  if (!empty($node) && isset($node->field_bundles) && !empty($node->field_bundles)) {
     // If there is one single bundle, set the context of the bundle
     $nb_bundles = count($node->field_bundles[LANGUAGE_NONE]);
     if ($nb_bundles == 1) {
@@ -141,10 +141,16 @@ function hr_bundles_node_og_context_handler($node = NULL) {
  */
 function hr_bundles_form_node_form_alter(&$form, &$form_state) {
   global $user;
-  if (isset($form['field_bundles']) && isset($form_state['entityreference_prepopulate'])) {
-    // Get operation gid
-    $type = $form_state['node']->type;
-    $op_gid = $form_state['entityreference_prepopulate']['node'][$type][OG_AUDIENCE_FIELD][0];
+  if (isset($form['field_bundles'])) {
+    $node = $form_state['node'];
+    if (!isset($node->nid) && isset($form_state['entityreference_prepopulate'])) {
+      // Get operation gid
+      $type = $form_state['node']->type;
+      $op_gid = $form_state['entityreference_prepopulate']['node'][$type][OG_AUDIENCE_FIELD][0];
+    }
+    else {
+      $op_gid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+    }
     // Make sure it is an operation
     $op = entity_load('node', array($op_gid));
     $op = $op[$op_gid];
@@ -186,6 +192,74 @@ function hr_bundles_form_node_form_alter(&$form, &$form_state) {
     </div>
   </div>
 </div>';
+  }
+}
+
+/**
+ * Implements hook_node_access($node, $op, $account)
+ * 
+ * Makes sure bundle editors or managers can not edit nodes which
+ * are not tagged with any bundle OR are tagged with bundles that they do not manage
+ * See http://atrium.humanitarianresponse.info/humanitarian_response/node/4363
+ */
+function hr_bundles_node_access($node, $op, $account) {
+  if (isset($node->nid) && isset($node->{OG_AUDIENCE_FIELD}) && !empty($node->{OG_AUDIENCE_FIELD}) && ($op == 'update' || $op == 'delete')) {
+    // Get the group id
+    $gid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+    $roles = og_get_user_roles('node', $gid, $account->uid);
+    // If I'm not a manager or editor of the main group or a global editor, check bundles
+    if (!in_array('manager', $roles) && !in_array('editor', $roles) && !in_array('contributor', $roles) && !in_array('editor', $account->roles)) {
+      $group = entity_load_single('node', $gid);
+      if ($group->type == 'hr_operation') {
+        // If there are no bundles tagged
+        if (empty($node->field_bundles)) {
+          return NODE_ACCESS_DENY;
+        }
+        else {
+          // Check each bundle and if the account is not a manager or editor of this bundle, deny access
+          foreach($node->field_bundles[LANGUAGE_NONE] as $bundle) {
+            $bid = $bundle['target_id'];
+            $roles = og_get_user_roles('node', $bid, $account->uid);
+            if (!in_array('manager', $roles) && !in_array('editor', $roles)) {
+              return NODE_ACCESS_DENY;
+            }
+          }
+        }
+      }
+    }
+  }
+  return NODE_ACCESS_IGNORE;
+}
+
+/**
+ * Implements hook_menu_alter().
+ *
+ * Change access callback for node revisions
+ */
+function hr_bundles_menu_alter(&$items) {
+  $items['node/%node/revisions']['access callback'] = 'hr_bundles_node_revision_access';
+  $items['node/%node/revisions']['access arguments'] = array(1);
+
+  $items['node/%node/revisions/%/view']['access callback'] = 'hr_bundles_node_revision_access';
+  $items['node/%node/revisions/%/view']['access arguments'] = array(1);
+
+  $items['node/%node/revisions/%/revert']['access callback'] = 'hr_bundles_node_revision_access';
+  $items['node/%node/revisions/%/revert']['access arguments'] = array(1, 4);
+  $items['node/%node/revisions/%/delete']['access callback'] = 'hr_bundles_node_revision_access';
+  $items['node/%node/revisions/%/delete']['access arguments'] = array(1, 4);
+  if (module_exists('diff')) {
+    $items['node/%node/revisions/view']['access callback'] = 'hr_bundles_node_revision_access';
+  }
+
+}
+
+function hr_bundles_node_revision_access($node, $op = 'view') {
+  global $user;
+  if (hr_bundles_node_access($node, 'update', $user) == NODE_ACCESS_DENY) {
+    return FALSE;
+  }
+  else {
+    return og_moderation_node_revision_access($node, $op);
   }
 }
 
