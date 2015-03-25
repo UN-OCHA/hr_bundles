@@ -506,15 +506,17 @@ function hr_bundles_facet_bundles_map_callback(array $values, array $options = a
   $operations = array();
   $entities = entity_load('node', $values);
   foreach ($values as $value) {
-    $entity = $entities[$value];
-    $field = $entity->{OG_AUDIENCE_FIELD};
-    $gid = $field[LANGUAGE_NONE][0]['target_id'];
-    if (!isset($operations[$gid])) {
-      $op = entity_load_single('node', $gid);
-      $operations[$gid] = entity_label('node', $op);
-    } 
+    if (isset($entities[$value])) {
+      $entity = $entities[$value];
+      $field = $entity->{OG_AUDIENCE_FIELD};
+      $gid = $field[LANGUAGE_NONE][0]['target_id'];
+      if (!isset($operations[$gid])) {
+        $op = entity_load_single('node', $gid);
+        $operations[$gid] = entity_label('node', $op);
+      } 
 
-    $map[$value] = entity_label('node', $entities[$value]).' ('.$operations[$gid].')';
+      $map[$value] = entity_label('node', $entities[$value]).' ('.$operations[$gid].')';
+    }
   }
   return $map;
 }
