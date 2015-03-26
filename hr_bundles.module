@@ -562,6 +562,41 @@ function hr_bundles_node_insert($node) {
       }
     }
   }
-  // TODO: make all managers and editors of the operation a bundle member of this bundle
+  // Make all managers and editors of the operation a bundle member of this bundle
   // See http://atrium.humanitarianresponse.info/humanitarian_response/node/4143
+  // Get users belonging to the operation
+  $group_members = _hr_bundles_get_users_in_group($op_gid);
+  $bundle_roles = og_roles('node', 'hr_bundle');
+  foreach ($group_members as $member) {
+    // If user is a manager or editor or contributor of the operation
+    $op_roles = og_get_user_roles('node', $op_gid, $member->uid);
+    if (in_array('manager', $op_roles) || in_array('editor', $op_roles) || in_array('contributor', $op_roles)) {
+      $membership = og_membership_create('node', $node->nid, 'user', $member->uid, 'og_user_node');
+      og_membership_save($membership);
+      foreach ($op_roles as $op_role) {
+        // Get rid of bundle role
+        $bundle_rid = array_search($op_role, $bundle_roles);
+        if ($bundle_rid) {
+          og_role_grant('node', $node->nid, $member->uid, $bundle_rid);
+        }
+      }
+    } 
+  }
 }
+
+
+
+/**
+ * Helper function: Get all users of a group
+ */
+function _hr_bundles_get_users_in_group($gid) {
+  $query = db_select('users', 'u');
+ 
+  $query
+    ->condition('u.uid', 0, '<>')
+    ->condition('u.status', 1, '=')
+    ->fields('u', array('uid', 'name'))
+    ->join('og_membership', 'ogm', "ogm.gid = :gid AND u.uid = ogm.etid AND ogm.entity_type = 'user'", array(':gid' => $gid));
+  return $query->execute();
+}
+
