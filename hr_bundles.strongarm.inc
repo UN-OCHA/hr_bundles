@@ -170,6 +170,7 @@ function hr_bundles_strongarm() {
     'hr_contacts' => '2',
     'hr_datasets' => '0',
     'hr_disasters' => '0',
+    'hr_discussions' => '0',
     'hr_documents' => '2',
     'hr_events' => '2',
     'hr_infographics' => '2',
