@@ -49,6 +49,7 @@ function hr_bundles_views_default_views() {
   $handler->display->display_options['fields']['path']['label'] = '';
   $handler->display->display_options['fields']['path']['exclude'] = TRUE;
   $handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['path']['absolute'] = TRUE;
   /* Field: Field: Website */
   $handler->display->display_options['fields']['field_website']['id'] = 'field_website';
   $handler->display->display_options['fields']['field_website']['table'] = 'field_data_field_website';
