@@ -1748,7 +1748,7 @@ function hr_bundles_strongarm() {
     'entity_form_field-user:field_responder_in' => 0,
     'entity_form_field-user:og_user_node' => 0,
     'entity_form_field-user:tmgmt_translation_skills' => 0,
-    'custom-custom' => 'custom-custom',
+    'custom-custom' => 0,
     'entity_field_extra-node:hr_core_share_button' => 0,
     'entity_field_extra-node:hr_core_read_more_button' => 0,
     'entity_field_extra-node:webform' => 0,
