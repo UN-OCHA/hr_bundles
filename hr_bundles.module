@@ -149,7 +149,12 @@ function hr_bundles_form_node_form_alter(&$form, &$form_state) {
       $op_gid = $form_state['entityreference_prepopulate']['node'][$type][OG_AUDIENCE_FIELD][0];
     }
     else {
-      $op_gid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+      if (isset($_GET[OG_AUDIENCE_FIELD])) {
+        $op_gid = $_GET[OG_AUDIENCE_FIELD];
+      }
+      else {
+        $op_gid = $node->{OG_AUDIENCE_FIELD}[LANGUAGE_NONE][0]['target_id'];
+      }
     }
     // Make sure it is an operation
     $op = entity_load('node', array($op_gid));
