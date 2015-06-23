@@ -729,11 +729,12 @@ Select "Closed" if you want only HID managers to be allowed to add HID users to 
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
+      'module' => 'entityreference',
       'settings' => array(
-        'apply_chosen' => 1,
+        'match_operator' => 'CONTAINS',
+        'size' => 60,
       ),
-      'type' => 'options_select',
+      'type' => 'entityreference_autocomplete_tags',
       'weight' => 5,
     ),
   );
